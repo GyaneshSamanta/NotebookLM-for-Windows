@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu, ipcMain, shell, Notification } = require('electron');
+const { app, BrowserWindow, Tray, Menu, ipcMain, shell, Notification, session } = require('electron');
 const path = require('path');
 const AutoLaunch = require('auto-launch');
 
@@ -20,7 +20,9 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
             webviewTag: true,
             nodeIntegration: false,
-            contextIsolation: true
+            contextIsolation: true,
+            // Persistent partition for session storage
+            partition: 'persist:notebooklm'
         },
         autoHideMenuBar: true,
     });
@@ -73,6 +75,22 @@ function createTray() {
 }
 
 app.whenReady().then(() => {
+    // Configure persistent session for the webview
+    // This ensures cookies, localStorage, and cache persist across restarts
+    const persistentSession = session.fromPartition('persist:notebooklm', {
+        cache: true
+    });
+
+    // Set up the persistent session to store data in userData folder
+    // This is crucial for login persistence
+    persistentSession.setStoragePath(path.join(app.getPath('userData'), 'notebooklm-session'));
+
+    // Configure session to persist cookies
+    persistentSession.cookies.on('changed', (event, cookie, cause, removed) => {
+        // Cookies are automatically persisted by Electron when using persist: partition
+        // This event handler is for debugging if needed
+    });
+
     createWindow();
     createTray();
 

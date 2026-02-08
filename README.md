@@ -35,7 +35,8 @@ That's it! No installation, no setup wizards. Just run and enjoy.
 | Feature | Description |
 |---------|-------------|
 | 🖥️ **Native Window** | NotebookLM in its own dedicated window, separate from your browser |
-| 🔔 **Smart Notifications** | Get Windows toast notifications when audio generation completes |
+| � **Persistent Login** | Stay signed in - your Google session persists across app restarts |
+| �🔔 **Smart Notifications** | Get Windows toast notifications when audio generation completes |
 | 📌 **System Tray** | Minimize to tray, keeps running in the background |
 | 🚀 **Auto-Launch** | Optional: Start automatically when Windows boots |
 | 🎨 **Custom Branding** | Sleek dark footer with quick settings |
