@@ -14,6 +14,12 @@
   <a href="#-for-developers">For Developers</a>
 </p>
 
+<p align="center">
+  <a href="https://www.buymeacoffee.com/gyaneshsamanta">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee">
+  </a>
+</p>
+
 ---
 
 ## 🚀 Quick Start
@@ -35,17 +41,17 @@ That's it! No installation, no setup wizards. Just run and enjoy.
 | Feature | Description |
 |---------|-------------|
 | 🖥️ **Native Window** | NotebookLM in its own dedicated window, separate from your browser |
-| � **Persistent Login** | Stay signed in - your Google session persists across app restarts |
-| �🔔 **Smart Notifications** | Get Windows toast notifications when audio generation completes |
+| 🔐 **Persistent Login** | Stay signed in - your Google session persists across app restarts |
+| 🔔 **Smart Notifications** | Get Windows toast notifications when audio generation completes |
 | 📌 **System Tray** | Minimize to tray, keeps running in the background |
 | 🚀 **Auto-Launch** | Optional: Start automatically when Windows boots |
-| 🎨 **Custom Branding** | Sleek dark footer with quick settings |
+| ☕ **Support the Developer** | Built-in Buy Me a Coffee link to support development |
 
 ---
 
 ## 🔔 How Notifications Work
 
-The app monitors the NotebookLM web page for completion events (like "Audio Overview generated"). When detected, it triggers a native Windows notification so you can work on other things while waiting.
+The app monitors NotebookLM for completion events. When detected, it triggers a native Windows notification so you can work on other things.
 
 **Detected Events:**
 - Audio Overview generated
@@ -60,16 +66,15 @@ The app monitors the NotebookLM web page for completion events (like "Audio Over
 
 ```
 NotebookLM-for-Windows/
-├── assets/
-│   └── icon.png           # App icon (256x256)
-├── main.js                 # Electron main process
-├── preload.js              # Secure bridge for IPC
-├── renderer.js             # UI logic
-├── webview-preload.js      # Injected into NotebookLM for notifications
-├── index.html              # App container
-├── package.json            # Dependencies & scripts
-├── build_installer.bat     # One-click build script
-└── README.md               # This file
+├── assets/icon.png         # App icon
+├── main.js                  # Electron main process
+├── preload.js               # Secure IPC bridge
+├── renderer.js              # UI logic
+├── webview-preload.js       # Notification detection
+├── index.html               # App container
+├── package.json             # Dependencies & scripts
+├── build_installer.bat      # One-click build script
+└── README.md
 ```
 
 ### Tech Stack
@@ -91,29 +96,36 @@ npm install
 # Run in development mode
 npm start
 
-# Build portable app
-npx electron-packager . NotebookGLM --platform=win32 --arch=x64 --out=setup --overwrite
+# Build portable app (one-click)
+build_installer.bat
+
+# Or manually:
+npm run pack
 ```
 
-The built app will be in `setup/NotebookGLM-win32-x64/`.
+The built app will be in `release/NotebookGLM-win32-x64/`.
 
 ### Creating a GitHub Release
 
-1. **Build** the app using the command above.
-2. **ZIP** the `setup/NotebookGLM-win32-x64` folder.
-3. Go to your repo → **Releases** → **Draft a new release**.
-4. Create a new tag (e.g., `v1.0.0`).
-5. Upload the ZIP file.
-6. Publish the release!
+1. Run `build_installer.bat` or `npm run pack`
+2. ZIP the `release/NotebookGLM-win32-x64` folder
+3. Go to repo → **Releases** → **Draft a new release**
+4. Create tag (e.g., `v1.2.0`), upload ZIP, publish!
 
 ---
 
 ## 📜 License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+GPL-3.0 License - see [LICENSE](LICENSE) for details.
 
 ---
 
 <p align="center">
   Built with ♥ by <a href="https://www.linkedin.com/in/gyanesh-samanta/">Gyanesh Samanta</a>
+</p>
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/gyaneshsamanta">
+    <img src="https://img.shields.io/badge/☕_Buy_me_a_coffee-FFDD00?style=flat-square" alt="Buy Me A Coffee">
+  </a>
 </p>
