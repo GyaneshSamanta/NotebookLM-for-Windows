@@ -15,6 +15,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/GyaneshSamanta/NotebookLM-for-Windows/releases">
+    <img src="https://img.shields.io/github/v/release/GyaneshSamanta/NotebookLM-for-Windows?style=for-the-badge&color=3385ff" alt="Latest Release">
+  </a>
+  <a href="https://github.com/GyaneshSamanta/NotebookLM-for-Windows/releases">
+    <img src="https://img.shields.io/github/downloads/GyaneshSamanta/NotebookLM-for-Windows/total?style=for-the-badge&logo=github&color=blue" alt="GitHub downloads">
+  </a>
   <a href="https://www.buymeacoffee.com/gyaneshsamanta">
     <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me A Coffee">
   </a>
