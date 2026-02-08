@@ -1,0 +1,42 @@
+{
+  "name": "notebookglm",
+  "version": "1.0.0",
+  "description": "Native desktop wrapper for Google NotebookLM",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager . NotebookGLM --platform=win32 --arch=x64 --out=setup --icon=assets/icon.png --overwrite --prune=true",
+    "dist": "npm run pack"
+  },
+  "author": "Gyanesh Samanta",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.1.0",
+    "electron-builder": "24.13.3"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "electron-updater": "^6.3.9"
+  },
+  "build": {
+    "appId": "com.gyanesh.notebookglm",
+    "productName": "NotebookGLM",
+    "directories": {
+      "output": "setup"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NotebookGLM",
+      "artifactName": "NotebookGLM-Setup.${ext}"
+    }
+  }
+}

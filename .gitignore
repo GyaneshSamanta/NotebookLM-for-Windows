@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+setup/
+dist/
+out/
+*.exe
+*.msi
+*.zip
+
+# Build logs and caches
+build_debug.log
+build.log
+*.log
+
+# Electron Builder cache
+.cache/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
