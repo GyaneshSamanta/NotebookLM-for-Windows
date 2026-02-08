@@ -5,32 +5,18 @@ echo      NotebookGLM Build Script
 echo ==========================================
 echo.
 
-echo [Step 1/3] Cleaning previous installations (Nuclear Option)...
-if exist node_modules (
-    echo Deleting node_modules...
-    rmdir /s /q node_modules
-)
-if exist package-lock.json (
-    echo Deleting package-lock.json...
-    del package-lock.json
-)
-if exist dist (
-    echo Cleaning dist folder...
-    rmdir /s /q dist
-)
-if exist setup (
-    echo Cleaning setup folder...
-    rmdir /s /q setup
-)
+echo [Step 0/3] Closing any running instances of NotebookGLM...
+taskkill /f /im NotebookGLM.exe >nul 2>&1
+timeout /t 2 >nul
 
-echo [Step 1a/3] Clearing Electron Builder Cache (Fixes binary errors)...
-if exist "%LOCALAPPDATA%\electron-builder\Cache" (
-    echo Clearing build tools cache...
-    rmdir /s /q "%LOCALAPPDATA%\electron-builder\Cache"
+echo [Step 1/3] Cleaning previous builds...
+if exist release (
+    echo Cleaning release folder...
+    rmdir /s /q release
 )
 
 echo.
-echo [Step 2/3] Installing dependencies (Fresh Install)...
+echo [Step 2/3] Installing dependencies...
 call npm install
 if %errorlevel% neq 0 (
     echo.
@@ -53,7 +39,7 @@ if %errorlevel% neq 0 (
 
 echo.
 echo ==========================================
-echo Success! Portable app is in the 'setup' folder.
+echo Success! Portable app is in the 'release' folder.
 echo You can run NotebookGLM.exe directly.
 echo ==========================================
 pause

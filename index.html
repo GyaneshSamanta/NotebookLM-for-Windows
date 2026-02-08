@@ -77,6 +77,7 @@
         src="https://notebooklm.google.com/"
         partition="persist:notebooklm"
         preload="./webview-preload.js"
+        allowpopups
       ></webview>
 
       <footer>
@@ -94,7 +95,14 @@
             >Gyanesh Samanta</a
           >
         </div>
-        <div class="spacer"></div>
+        <div class="spacer" style="display: flex; align-items: center; gap: 8px;">
+          <a
+            href="#"
+            onclick="openLink('https://www.buymeacoffee.com/gyaneshsamanta')"
+            style="display: flex; align-items: center; gap: 4px; background: #FFDD00; color: #000; padding: 4px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; text-decoration: none;"
+            title="Buy me a coffee"
+          >☕ Buy me a coffee</a>
+        </div>
       </footer>
     </div>
     <script src="renderer.js"></script>

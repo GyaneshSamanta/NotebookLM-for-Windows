@@ -2,6 +2,9 @@ const { app, BrowserWindow, Tray, Menu, ipcMain, shell, Notification, session } 
 const path = require('path');
 const AutoLaunch = require('auto-launch');
 
+// Set app name for consistent userData path (ensures login persists even if app is moved)
+app.setName('NotebookGLM');
+
 let mainWindow;
 let tray;
 let isQuitting = false;
@@ -20,9 +23,7 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
             webviewTag: true,
             nodeIntegration: false,
-            contextIsolation: true,
-            // Persistent partition for session storage
-            partition: 'persist:notebooklm'
+            contextIsolation: true
         },
         autoHideMenuBar: true,
     });
@@ -76,20 +77,15 @@ function createTray() {
 
 app.whenReady().then(() => {
     // Configure persistent session for the webview
-    // This ensures cookies, localStorage, and cache persist across restarts
-    const persistentSession = session.fromPartition('persist:notebooklm', {
-        cache: true
-    });
-
-    // Set up the persistent session to store data in userData folder
-    // This is crucial for login persistence
-    persistentSession.setStoragePath(path.join(app.getPath('userData'), 'notebooklm-session'));
-
-    // Configure session to persist cookies
-    persistentSession.cookies.on('changed', (event, cookie, cause, removed) => {
-        // Cookies are automatically persisted by Electron when using persist: partition
-        // This event handler is for debugging if needed
-    });
+    // The 'persist:' prefix automatically persists cookies and storage
+    try {
+        const persistentSession = session.fromPartition('persist:notebooklm', {
+            cache: true
+        });
+        // Session is now configured - Electron handles persistence automatically
+    } catch (err) {
+        console.error('Session config error:', err);
+    }
 
     createWindow();
     createTray();

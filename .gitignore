@@ -4,6 +4,7 @@ package-lock.json
 
 # Build outputs
 setup/
+release/
 dist/
 out/
 *.exe

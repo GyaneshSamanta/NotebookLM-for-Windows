@@ -5,14 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-packager . NotebookGLM --platform=win32 --arch=x64 --out=setup --icon=assets/icon.png --overwrite --prune=true",
+    "pack": "npx @electron/packager . NotebookGLM --platform=win32 --arch=x64 --out=release --overwrite --prune=true",
     "dist": "npm run pack"
   },
   "author": "Gyanesh Samanta",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^34.1.0",
-    "electron-builder": "24.13.3"
+    "@electron/packager": "^18.3.2",
+    "electron": "^34.1.0"
   },
   "dependencies": {
     "auto-launch": "^5.0.6",
