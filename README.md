@@ -1,4 +1,4 @@
-# NotebookGLM Desktop
+# NotebookLM Desktop
 
 <p align="center">
   <img src="assets/icon.png" alt="NotebookGLM Logo" width="128" height="128">
