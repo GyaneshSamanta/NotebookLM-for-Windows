@@ -1,12 +1,12 @@
 @echo off
-title Building NotebookGLM...
+title Building NotebookLM-for-Windows...
 echo ==========================================
-echo      NotebookGLM Build Script
+echo      NotebookLM-for-Windows Build Script
 echo ==========================================
 echo.
 
-echo [Step 0/3] Closing any running instances of NotebookGLM...
-taskkill /f /im NotebookGLM.exe >nul 2>&1
+echo [Step 0/3] Closing any running instances of NotebookLM-for-Windows...
+taskkill /f /im NotebookLM-for-Windows.exe >nul 2>&1
 timeout /t 2 >nul
 
 echo [Step 1/3] Cleaning previous builds...
@@ -40,7 +40,7 @@ if %errorlevel% neq 0 (
 echo.
 echo ==========================================
 echo Success! Portable app is in the 'release' folder.
-echo You can run NotebookGLM.exe directly.
+echo You can run NotebookLM-for-Windows.exe directly.
 echo ==========================================
 pause
 exit

@@ -3,7 +3,7 @@ const path = require('path');
 const AutoLaunch = require('auto-launch');
 
 // Set app name for consistent userData path (ensures login persists even if app is moved)
-app.setName('NotebookGLM');
+app.setName('NotebookLM-for-Windows');
 
 let mainWindow;
 let tray;
@@ -11,7 +11,7 @@ let isQuitting = false;
 
 // Auto-launch configuration
 const appLauncher = new AutoLaunch({
-    name: 'NotebookGLM',
+    name: 'NotebookLM-for-Windows',
 });
 
 function createWindow() {
@@ -67,7 +67,7 @@ function createTray() {
         }
     ]);
 
-    tray.setToolTip('NotebookGLM');
+    tray.setToolTip('NotebookLM-for-Windows');
     tray.setContextMenu(contextMenu);
 
     tray.on('click', () => {

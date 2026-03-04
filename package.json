@@ -1,11 +1,11 @@
 {
-  "name": "notebookglm",
+  "name": "notebooklm-for-windows",
   "version": "1.0.0",
   "description": "Native desktop wrapper for Google NotebookLM",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "npx @electron/packager . NotebookGLM --platform=win32 --arch=x64 --out=release --overwrite --prune=true",
+    "pack": "npx @electron/packager . NotebookLM-for-Windows --platform=win32 --arch=x64 --out=release --overwrite --prune=true",
     "dist": "npm run pack"
   },
   "author": "Gyanesh Samanta",
@@ -19,8 +19,8 @@
     "electron-updater": "^6.3.9"
   },
   "build": {
-    "appId": "com.gyanesh.notebookglm",
-    "productName": "NotebookGLM",
+    "appId": "com.gyanesh.notebooklm-for-windows",
+    "productName": "NotebookLM-for-Windows",
     "directories": {
       "output": "setup"
     },
@@ -35,8 +35,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "NotebookGLM",
-      "artifactName": "NotebookGLM-Setup.${ext}"
+      "shortcutName": "NotebookLM-for-Windows",
+      "artifactName": "NotebookLM-for-Windows-Setup.${ext}"
     }
   }
 }
