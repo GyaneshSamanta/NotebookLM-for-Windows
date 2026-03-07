@@ -44,7 +44,7 @@ function createWindow() {
         height: 800,
         frame: false, // Custom title bar
         transparent: false,
-        icon: path.join(__dirname, 'assets', 'icon.png'),
+        icon: path.join(__dirname, '../assets', 'icon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             webviewTag: true,
@@ -58,7 +58,7 @@ function createWindow() {
         mainWindow.setOpacity(appConfig.opacity);
     }
 
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
     mainWindow.on('close', (event) => {
         if (!isQuitting) {
@@ -77,7 +77,7 @@ function createWindow() {
 }
 
 function createTray() {
-    const iconPath = path.join(__dirname, 'assets', 'icon.png'); 
+    const iconPath = path.join(__dirname, '../assets', 'icon.png'); 
     tray = new Tray(iconPath);
     
     const contextMenu = Menu.buildFromTemplate([

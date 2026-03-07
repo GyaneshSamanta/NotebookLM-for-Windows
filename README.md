@@ -96,12 +96,13 @@ The app monitors NotebookLM for completion events. When detected, it triggers a 
 
 ```
 NotebookLM-for-Windows/
-├── assets/icon.png         # App icon
-├── main.js                  # Electron main process
-├── preload.js               # Secure IPC bridge
-├── renderer.js              # UI logic
-├── webview-preload.js       # Notification detection
-├── index.html               # App container
+├── assets/icon.png          # App icon
+├── src/
+│   ├── main.js              # Electron main process
+│   ├── preload.js           # Secure IPC bridge
+│   ├── renderer.js          # UI logic
+│   ├── webview-preload.js   # Notification detection
+│   └── index.html           # App container
 ├── package.json             # Dependencies & scripts
 ├── build_installer.bat      # One-click build script
 └── README.md
@@ -140,7 +141,7 @@ The built app will be in `release/NotebookLM-for-Windows-win32-x64/`.
 1. Run `build_installer.bat` or `npm run pack`
 2. ZIP the `release/NotebookLM-for-Windows-win32-x64` folder
 3. Go to repo → **Releases** → **Draft a new release**
-4. Create tag (e.g., `v1.2.0`), upload ZIP, publish!
+4. Create tag (e.g., `v2.0.0`), upload ZIP, publish!
 
 ---
 

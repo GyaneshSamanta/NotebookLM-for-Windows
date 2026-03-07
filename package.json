@@ -2,7 +2,7 @@
   "name": "notebooklm-for-windows",
   "version": "2.0.0",
   "description": "Native desktop wrapper for Google NotebookLM",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "pack": "npx @electron/packager . NotebookLM-for-Windows --platform=win32 --arch=x64 --out=release --overwrite --prune=true",
