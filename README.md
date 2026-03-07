@@ -46,16 +46,36 @@ That's it! No installation, no setup wizards. Just run and enjoy.
 
 ---
 
-## ✨ Features
+> [!WARNING]
+> **IMPORTANT: Upgrading to v2.0**
+> To access all the exciting new features, you must **download the new v2.0.0 release**. Because of the underlying architecture upgrades for these new features, you will need to **login to your Google account again** upon your first run. Enjoy the new superpowers!
+
+## 🎉 What's New in v2.0 (Major Upgrade)
+
+The v2.0 update transforms this app from a simple web wrapper into a powerful, deeply integrated Windows research utility:
+
+- 👻 **Ghost Mode (Transparency):** Use the new opacity slider in the title bar to make the entire application transparent. Perfect for referencing PDFs, web pages, or videos running underneath NotebookLM!
+- ⚡ **Global Quick-Clip (Ctrl+Alt+N):** Found something interesting? Just copy it to your clipboard from any app, press `Ctrl+Alt+N`, and NotebookLM will immediately jump to the foreground and automatically paste it into your active notes.
+- 🪟 **Split View:** Why settle for one notebook? Toggle Split View in the title bar to work with two different Notebooks side-by-side in the same window, seamlessly sharing your login session.
+- 📥 **Native Drag-and-Drop:** Drag and drop your PDFs, TXT, or Markdown files right onto the app window from your desktop to instantly trigger the upload pipeline.
+- 🎨 **Redesigned UI & UX:** Enjoy a brand-new frameless window design with a sleek custom title bar, beautiful Deep Purple gradients, and an updated footer.
+
+---
+
+## ✨ Full Feature List
 
 | Feature | Description |
 |---------|-------------|
-| 🖥️ **Native Window** | NotebookLM in its own dedicated window, separate from your browser |
-| 🔐 **Persistent Login** | Stay signed in - your Google session persists across app restarts |
-| 🔔 **Smart Notifications** | Get Windows toast notifications when audio generation completes |
-| 📌 **System Tray** | Minimize to tray, keeps running in the background |
-| 🚀 **Auto-Launch** | Optional: Start automatically when Windows boots |
-| ☕ **Support Development** | Support me with as little as **10 rs** via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) |
+| 👻 **Ghost Mode** | Custom opacity slider to see through the app window |
+| ⚡ **Quick-Clip** | Copy text anywhere -> `Ctrl+Alt+N` -> Instantly paste in NotebookLM |
+| 🪟 **Split View** | Work on two different Notebooks simultaneously side-by-side |
+| 📥 **Drag & Drop** | Drop files natively onto the app to upload as sources |
+| 🖥️ **Native App** | Dedicated, frameless desktop app with custom window controls |
+| 🔐 **Persistent Login**| Stay signed in across sessions using secure AppData storage |
+| 🔔 **Notifications** | Windows toast notifications when audio generation completes |
+| 📌 **System Tray** | Minimize to tray to keep the app readily accessible |
+| 🚀 **Auto-Launch** | Configure the app to start quietly when Windows boots |
+| ☕ **Support Me** | Support further development with **10 rs** via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) |
 
 ---
 

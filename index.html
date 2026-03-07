@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>NotebookLM-for-Windows</title>
+    <title>NotebookLM-for-Windows v2</title>
     <style>
       body {
         margin: 0;
@@ -10,101 +10,223 @@
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
           Arial, sans-serif;
-        background-color: #fce8e6; /* NotebookLM brand-ish background */
+        background-color: #f3e8f8; /* Light Lavender */
         display: flex;
         flex-direction: column;
         height: 100vh;
         overflow: hidden;
       }
+      /* Custom Title Bar */
+      #titlebar {
+        height: 32px;
+        background: linear-gradient(90deg, #6B21A8, #8b3cce); /* Deep Purple Gradient */
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        -webkit-app-region: drag; /* Makes the title bar draggable */
+        user-select: none;
+      }
+      #titlebar-left {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        gap: 10px;
+      }
+      #titlebar-title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      #titlebar-middle {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        -webkit-app-region: no-drag;
+      }
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+      }
+      #opacity-slider {
+        width: 80px;
+        accent-color: #fce8e6;
+        cursor: pointer;
+      }
+      .tbtn {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: bold;
+        transition: background 0.2s;
+      }
+      .tbtn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+      #titlebar-right {
+        display: flex;
+        -webkit-app-region: no-drag;
+        height: 100%;
+      }
+      .win-btn {
+        width: 40px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .win-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      #close-btn:hover {
+        background: #e81123;
+      }
+
+      /* Main container (split view support) */
       #app-container {
         flex: 1;
         display: flex;
-        flex-direction: column;
+        transition: all 0.3s ease;
       }
+      
+      .view-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid #d1b3e8; /* subtle divider */
+      }
+      
+      .view-container.hidden {
+        display: none;
+      }
+      
       webview {
         flex: 1;
         width: 100%;
         height: 100%;
       }
+      
+      /* Footer */
       footer {
-        height: 50px;
-        background-color: #0d1b2a; /* Dark Blue */
-        border-top: 1px solid #1b263b;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        height: 40px;
+        background: linear-gradient(90deg, #3a1072, #5a189a); /* Darker Purple Gradient */
+        border-top: 1px solid #380b6b;
+        padding: 0 15px;
+        display: flex;
         align-items: center;
-        font-size: 14px;
+        justify-content: center;
+        font-size: 13px;
         color: #e0e1dd;
         user-select: none;
+        position: relative;
       }
       footer a {
-        color: #4cc9f0;
+        color: #d1b3e8; /* Light purple link */
         text-decoration: none;
         cursor: pointer;
         font-weight: bold;
         transition: color 0.2s;
       }
       footer a:hover {
-        color: #4895ef;
+        color: #f3e8f8;
         text-decoration: underline;
       }
-      .settings {
-        justify-self: start;
+      .footer-side-left {
+        position: absolute;
+        left: 15px;
         display: flex;
         align-items: center;
-        gap: 8px;
-        cursor: pointer;
       }
-      .branding {
-        justify-self: center;
+      .footer-center {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      .spacer {
-        justify-self: end;
-      }
-      /* Custom checkbox styling to match dark theme */
-      input[type="checkbox"] {
-        accent-color: #4cc9f0;
-        cursor: pointer;
+      .footer-side-right {
+        position: absolute;
+        right: 15px;
+        display: flex;
+        align-items: center;
       }
     </style>
   </head>
   <body>
-    <div id="app-container">
-      <!-- NotebookLM WebView -->
-      <webview
-        id="notebookView"
-        src="https://notebooklm.google.com/"
-        partition="persist:notebooklm"
-        preload="./webview-preload.js"
-        allowpopups
-      ></webview>
-
-      <footer>
-        <div class="settings" title="Toggle Auto-Launch">
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 6px;">
-            <input type="checkbox" id="autoLaunchToggle" />
-            Launch on Startup
-          </label>
-        </div>
-        <div class="branding">
-          Built with <span style="color: #ff006e; font-size: 1.2em;">&hearts;</span> by
-          <a
-            href="#"
-            onclick="openLink('https://www.linkedin.com/in/gyanesh-samanta/')"
-            >Gyanesh Samanta</a
-          >
-        </div>
-        <div class="spacer" style="display: flex; align-items: center; gap: 8px;">
-          <a
-            href="#"
-            onclick="openLink('https://buymeachai.ezee.li/GyaneshOnProduct')"
-            style="display: flex; align-items: center; gap: 4px; background: #FFDD00; color: #000; padding: 4px 10px; border-radius: 5px; font-weight: bold; font-size: 12px; text-decoration: none;"
-            title="Support me with as little as 10 rs on Buy Me A Chai!"
-          >☕ Buy Me A Chai</a>
-        </div>
-      </footer>
+    <!-- Custom Title Bar -->
+    <div id="titlebar">
+      <div id="titlebar-left">
+        <span id="titlebar-title">NotebookLM-for-Windows v2</span>
+      </div>
+      <div id="titlebar-middle">
+        <label class="control-group" title="Ghost Mode (Transparency)">
+          Opacity
+          <input type="range" id="opacity-slider" min="0.2" max="1.0" step="0.05" value="1.0">
+        </label>
+        <button id="split-toggle" class="tbtn">Split View</button>
+      </div>
+      <div id="titlebar-right">
+        <button class="win-btn" id="min-btn">&#xE921;</button>
+        <button class="win-btn" id="max-btn">&#xE922;</button>
+        <button class="win-btn" id="close-btn">&#xE8BB;</button>
+      </div>
     </div>
+
+    <div id="app-container">
+      <!-- NotebookLM WebView 1 -->
+      <div class="view-container" id="view1-container">
+        <webview
+          id="notebookView1"
+          src="https://notebooklm.google.com/"
+          partition="persist:notebooklm"
+          preload="./webview-preload.js"
+          allowpopups
+        ></webview>
+      </div>
+
+      <!-- NotebookLM WebView 2 (Split View) -->
+      <div class="view-container hidden" id="view2-container">
+        <webview
+          id="notebookView2"
+          src="https://notebooklm.google.com/"
+          partition="persist:notebooklm"
+          preload="./webview-preload.js"
+          allowpopups
+        ></webview>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-side-left">
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 11px;" title="Launch app on system startup">
+          <input type="checkbox" id="autoLaunchToggle" /> Auto-Launch
+        </label>
+      </div>
+      <div class="footer-center">
+        <div class="branding">
+          built with <span style="color: #ff006e;">&hearts;</span> by 
+          <a href="#" onclick="openLink('https://www.linkedin.com/in/gyanesh-samanta/')">Gyanesh Samanta</a>
+        </div>
+        <span style="opacity: 0.5; font-size: 12px; margin: 0 5px;">|</span>
+        <span style="font-size: 12px; color: #f3e8f8; font-weight: 500;">Follow for more:</span>
+        <a href="#" onclick="openLink('https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/')">Newsletter</a>
+        <a href="#" onclick="openLink('https://github.com/GyaneshSamanta')">GitHub</a>
+      </div>
+      <div class="footer-side-right">
+        <a href="#" onclick="openLink('https://buymeachai.ezee.li/GyaneshOnProduct')" style="background: #FFDD00; color: #000; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 12px;">☕ Buy Me A Chai</a>
+      </div>
+    </footer>
     <script src="renderer.js"></script>
+    <script>
+      document.getElementById('min-btn').innerText = '—';
+      document.getElementById('max-btn').innerText = '□';
+      document.getElementById('close-btn').innerText = '✕';
+    </script>
   </body>
 </html>
