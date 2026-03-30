@@ -120,8 +120,8 @@ NotebookLM-for-Windows/
 
 ### Tech Stack
 
-- **[Electron](https://www.electronjs.org/)** - Cross-platform desktop apps
-- **[auto-launch](https://www.npmjs.com/package/auto-launch)** - Windows startup integration
+- **[Electron](https://www.electronjs.org/)** - For building cross-platform desktop apps
+- **[auto-launch](https://www.npmjs.com/package/auto-launch)** - For Windows startup integration
 - **Vanilla JS/HTML/CSS** - No framework bloat
 
 ### Build from Source
@@ -153,6 +153,10 @@ The built app will be in `release/NotebookLM-for-Windows-win32-x64/`.
 3. Go to repo → **Releases** → **Draft a new release**
 4. Create tag (e.g., `v2.0.0`), upload ZIP, publish!
 
+### 🤝 How to Contribute
+
+We welcome contributions! Please refer to our [**CONTRIBUTING.md**](CONTRIBUTING.md) for detailed setup instructions and our workflow for submitting pull requests.
+
 ---
 
 ## 📜 License
@@ -174,3 +178,4 @@ GPL-3.0 License - see [LICENSE](LICENSE) for details.
 <p align="center">
   <em>Supporters can contribute as little as 10 rs! ☕</em>
 </p>
+
