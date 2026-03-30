@@ -79,6 +79,16 @@ The v2.0 update transforms this app from a simple web wrapper into a powerful, d
 
 ---
 
+## 🖼️ Split View Showcase
+
+The Split View toggle turns NotebookLM-for-Windows into a two-pane research studio. These screenshots capture how separate notebooks stay signed into the same session while displaying different sources (brain activity research on the left, earnings reports on the right).
+
+![Split view demo 1 showing the "Can a computer simulate brain activity?" notebook alongside a secondary pane](assets/split-view-1.png)
+
+![Split view demo 2 highlighting a connectomics study guide next to a Q3 acceleration briefing](assets/split-view-2.png)
+
+---
+
 ## 🔔 How Notifications Work
 
 The app monitors NotebookLM for completion events. When detected, it triggers a native Windows notification so you can work on other things.
