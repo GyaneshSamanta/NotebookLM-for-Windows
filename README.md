@@ -27,7 +27,9 @@
 </p>
 
 > [!NOTE]
-> **Thank you for 150+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application. Your support keeps me motivated to keep improving it! 
+> **Thank you for 400+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application.
+>
+> ☕ **Support the Developer:** I love building open-source projects like this one. If you find this app useful, consider supporting my work! You can contribute via [**Buy Me A Chai**](https://buymeachai.ezee.li/GyaneshOnProduct) (supports **UPI**). Every contribution helps me bring out more such projects!
 
 
 ---
@@ -75,7 +77,7 @@ The v2.0 update transforms this app from a simple web wrapper into a powerful, d
 | 🔔 **Notifications** | Windows toast notifications when audio generation completes |
 | 📌 **System Tray** | Minimize to tray to keep the app readily accessible |
 | 🚀 **Auto-Launch** | Configure the app to start quietly when Windows boots |
-| ☕ **Support Me** | Support further development with **10 rs** via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) |
+| ☕ **Support Me** | Support further development via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) (UPI Supported!) |
 
 ---
 
@@ -168,14 +170,3 @@ GPL-3.0 License - see [LICENSE](LICENSE) for details.
 <p align="center">
   Built with ♥ by <a href="https://www.linkedin.com/in/gyanesh-samanta/">Gyanesh Samanta</a>
 </p>
-
-<p align="center">
-  <a href="https://buymeachai.ezee.li/GyaneshOnProduct">
-    <img src="https://buymeachai.ezee.li/assets/images/buymeachai-button.png" alt="Buy Me A Chai" width="200">
-  </a>
-</p>
-
-<p align="center">
-  <em>Supporters can contribute as little as 10 rs! ☕</em>
-</p>
-
