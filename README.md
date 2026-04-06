@@ -27,7 +27,9 @@
 </p>
 
 > [!NOTE]
-> **Thank you for 150+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application. Your support keeps me motivated to keep improving it! 
+> **Thank you for 400+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application.
+>
+> ☕ **Support the Developer:** I love building open-source projects like this one. If you find this app useful, consider supporting my work! You can contribute as little as **20 rs** via [**Buy Me A Chai**](https://buymeachai.ezee.li/GyaneshOnProduct) (supports **UPI**). Every contribution helps me bring out more such projects!
 
 
 ---
@@ -75,7 +77,7 @@ The v2.0 update transforms this app from a simple web wrapper into a powerful, d
 | 🔔 **Notifications** | Windows toast notifications when audio generation completes |
 | 📌 **System Tray** | Minimize to tray to keep the app readily accessible |
 | 🚀 **Auto-Launch** | Configure the app to start quietly when Windows boots |
-| ☕ **Support Me** | Support further development with **10 rs** via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) |
+| ☕ **Support Me** | Support further development (as little as **20 rs**) via [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) (UPI Supported!) |
 
 ---
 
@@ -120,8 +122,8 @@ NotebookLM-for-Windows/
 
 ### Tech Stack
 
-- **[Electron](https://www.electronjs.org/)** - Cross-platform desktop apps
-- **[auto-launch](https://www.npmjs.com/package/auto-launch)** - Windows startup integration
+- **[Electron](https://www.electronjs.org/)** - For building cross-platform desktop apps
+- **[auto-launch](https://www.npmjs.com/package/auto-launch)** - For Windows startup integration
 - **Vanilla JS/HTML/CSS** - No framework bloat
 
 ### Build from Source
@@ -153,6 +155,10 @@ The built app will be in `release/NotebookLM-for-Windows-win32-x64/`.
 3. Go to repo → **Releases** → **Draft a new release**
 4. Create tag (e.g., `v2.0.0`), upload ZIP, publish!
 
+### 🤝 How to Contribute
+
+We welcome contributions! Please refer to our [**CONTRIBUTING.md**](CONTRIBUTING.md) for detailed setup instructions and our workflow for submitting pull requests.
+
 ---
 
 ## 📜 License
@@ -163,14 +169,4 @@ GPL-3.0 License - see [LICENSE](LICENSE) for details.
 
 <p align="center">
   Built with ♥ by <a href="https://www.linkedin.com/in/gyanesh-samanta/">Gyanesh Samanta</a>
-</p>
-
-<p align="center">
-  <a href="https://buymeachai.ezee.li/GyaneshOnProduct">
-    <img src="https://buymeachai.ezee.li/assets/images/buymeachai-button.png" alt="Buy Me A Chai" width="200">
-  </a>
-</p>
-
-<p align="center">
-  <em>Supporters can contribute as little as 10 rs! ☕</em>
 </p>
