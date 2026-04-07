@@ -36,21 +36,23 @@
 
 ## 🚀 Quick Start
 
-### Download & Run (No Installation Required!)
+### Download & Run
 
 1. **Download** the latest release from the [**Releases Page**](../../releases).
-2. **Extract** the ZIP file to any folder.
-3. **Run** `NotebookLM-for-Windows.exe` inside the extracted folder.
+2. **Choose your version:**
+   - **Installer (`-Setup.exe`):** Recommended for most users. Installs the app to your system with desktop and start menu shortcuts.
+   - **Portable (`.exe`):** No installation required. Just download and run!
+3. **Run** the downloaded file and you're good to go!
 
-That's it! No installation, no setup wizards. Just run and enjoy.
+That's it! No complex extraction or setup. Just run and enjoy.
 
 > **Tip:** Pin `NotebookLM-for-Windows.exe` to your taskbar for quick access!
 
 ---
 
 > [!WARNING]
-> **IMPORTANT: Upgrading to v2.0**
-> To access all the exciting new features, you must **download the new v2.0.0 release**. Because of the underlying architecture upgrades for these new features, you will need to **login to your Google account again** upon your first run. Enjoy the new superpowers!
+> **IMPORTANT: Upgrading to v2.1**
+> With the v2.1 release, we have switched to a professional installer and auto-update system. If you were using a previous version, we recommend downloading the new **Installer** to enable automatic background updates.
 
 ## 🎉 What's New in v2.0 (Major Upgrade)
 
@@ -139,21 +141,17 @@ npm install
 # Run in development mode
 npm start
 
-# Build portable app (one-click)
-build_installer.bat
-
-# Or manually:
-npm run pack
+# Build installer and portable EXE
+npm run dist
 ```
 
-The built app will be in `release/NotebookLM-for-Windows-win32-x64/`.
+The built assets will be in the `dist/` folder.
 
 ### Creating a GitHub Release
 
-1. Run `build_installer.bat` or `npm run pack`
-2. ZIP the `release/NotebookLM-for-Windows-win32-x64` folder
-3. Go to repo → **Releases** → **Draft a new release**
-4. Create tag (e.g., `v2.0.0`), upload ZIP, publish!
+1. Run `npm run dist`
+2. Go to repo → **Releases** → **Draft a new release**
+3. Create tag (e.g., `v2.1.0`), upload the `.exe` files from `dist/`, publish!
 
 ### 🤝 How to Contribute
 

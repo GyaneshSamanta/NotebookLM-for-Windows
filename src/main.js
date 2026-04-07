@@ -2,6 +2,7 @@ const { app, BrowserWindow, Tray, Menu, ipcMain, shell, Notification, session, g
 const path = require('path');
 const fs = require('fs');
 const AutoLaunch = require('auto-launch');
+const { autoUpdater } = require('electron-updater');
 
 app.setName('NotebookLM-for-Windows');
 
@@ -136,6 +137,9 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
+
+    // Check for updates
+    autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on('will-quit', () => {
@@ -195,6 +199,24 @@ ipcMain.handle('set-auto-launch', async (event, enable) => {
         await appLauncher.disable();
     }
     return enable;
+});
+
+// Auto-updater config
+autoUpdater.autoDownload = true;
+autoUpdater.autoInstallOnAppQuit = true;
+
+autoUpdater.on('update-available', () => {
+    new Notification({
+        title: 'Update Available',
+        body: 'A new version of NotebookLM-for-Windows is available. It will be downloaded in the background.'
+    }).show();
+});
+
+autoUpdater.on('update-downloaded', () => {
+    new Notification({
+        title: 'Update Ready',
+        body: 'The new version has been downloaded and will be installed when you restart the app.'
+    }).show();
 });
 
 app.on('window-all-closed', () => {
