@@ -27,7 +27,7 @@
 </p>
 
 > [!NOTE]
-> **Thank you for 400+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application.
+> **Thank you for 2k+ downloads!** 🚀 I'm incredibly grateful to everyone who has downloaded and used this application. Thank you all for your amazing support!
 >
 > ☕ **Support the Developer:** I love building open-source projects like this one. If you find this app useful, consider supporting my work! You can contribute as little as **20 rs** via [**Buy Me A Chai**](https://buymeachai.ezee.li/GyaneshOnProduct) (supports **UPI**). Every contribution helps me bring out more such projects!
 
