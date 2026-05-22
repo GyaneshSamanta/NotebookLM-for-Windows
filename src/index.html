@@ -2,174 +2,176 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>NotebookLM-for-Windows v2</title>
+    <title>NotebookLM-for-Windows v3</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        background-color: #f3e8f8; /* Light Lavender */
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow: hidden;
+      :root {
+        --bg: #f3e8f8;
+        --titlebar-grad-a: #6B21A8;
+        --titlebar-grad-b: #8b3cce;
+        --footer-grad-a: #3a1072;
+        --footer-grad-b: #5a189a;
+        --footer-border: #380b6b;
+        --text-on-purple: #ffffff;
+        --text-muted: #e0e1dd;
+        --link: #d1b3e8;
+        --link-hover: #f3e8f8;
+        --divider: #d1b3e8;
+        --close-hover: #e81123;
+        --btn-bg: rgba(255, 255, 255, 0.15);
+        --btn-bg-hover: rgba(255, 255, 255, 0.3);
+        --btn-bg-active: rgba(255, 255, 255, 0.5);
+        --modal-bg: #ffffff;
+        --modal-fg: #1a1a1a;
+        --modal-border: #d1b3e8;
+        --error-bg: #ffffff;
+        --error-fg: #1a1a1a;
       }
-      /* Custom Title Bar */
+      [data-theme="dark"] {
+        --bg: #0f0a14;
+        --titlebar-grad-a: #2a0a4a;
+        --titlebar-grad-b: #4a1773;
+        --footer-grad-a: #1a0530;
+        --footer-grad-b: #2a0a4a;
+        --footer-border: #110422;
+        --text-on-purple: #f0e6ff;
+        --text-muted: #b8a8c8;
+        --link: #c79de8;
+        --link-hover: #f0e6ff;
+        --divider: #2a1a3a;
+        --close-hover: #c11020;
+        --btn-bg: rgba(255, 255, 255, 0.08);
+        --btn-bg-hover: rgba(255, 255, 255, 0.18);
+        --btn-bg-active: rgba(255, 255, 255, 0.3);
+        --modal-bg: #1a1226;
+        --modal-fg: #f0e6ff;
+        --modal-border: #3a2a4a;
+        --error-bg: #1a1226;
+        --error-fg: #f0e6ff;
+      }
+      body {
+        margin: 0; padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--bg);
+        display: flex; flex-direction: column;
+        height: 100vh; overflow: hidden;
+      }
       #titlebar {
         height: 32px;
-        background: linear-gradient(90deg, #6B21A8, #8b3cce); /* Deep Purple Gradient */
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        -webkit-app-region: drag; /* Makes the title bar draggable */
-        user-select: none;
+        background: linear-gradient(90deg, var(--titlebar-grad-a), var(--titlebar-grad-b));
+        color: var(--text-on-purple);
+        display: flex; align-items: center; justify-content: space-between;
+        -webkit-app-region: drag; user-select: none;
       }
-      #titlebar-left {
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        gap: 10px;
-      }
-      #titlebar-title {
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
-      #titlebar-middle {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        -webkit-app-region: no-drag;
-      }
-      .control-group {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 12px;
-      }
-      #opacity-slider {
-        width: 80px;
-        accent-color: #fce8e6;
-        cursor: pointer;
-      }
+      #titlebar-left { display: flex; align-items: center; padding-left: 10px; gap: 10px; }
+      #titlebar-title { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+      #titlebar-middle { display: flex; align-items: center; gap: 12px; -webkit-app-region: no-drag; }
+      .control-group { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+      #opacity-slider { width: 80px; accent-color: #fce8e6; cursor: pointer; }
       .tbtn {
-        background: rgba(255, 255, 255, 0.15);
-        border: none;
-        color: white;
-        padding: 3px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 11px;
-        font-weight: bold;
-        transition: background 0.2s;
+        background: var(--btn-bg); border: none; color: var(--text-on-purple);
+        padding: 3px 8px; border-radius: 4px; cursor: pointer;
+        font-size: 11px; font-weight: bold; transition: background 0.2s;
       }
-      .tbtn:hover {
-        background: rgba(255, 255, 255, 0.3);
-      }
-      #titlebar-right {
-        display: flex;
-        -webkit-app-region: no-drag;
-        height: 100%;
-      }
+      .tbtn:hover { background: var(--btn-bg-hover); }
+      .tbtn.active { background: var(--btn-bg-active); }
+      #titlebar-right { display: flex; -webkit-app-region: no-drag; height: 100%; }
       .win-btn {
-        width: 40px;
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background 0.2s;
+        width: 40px; background: transparent; border: none;
+        color: var(--text-on-purple); font-size: 14px; cursor: pointer; transition: background 0.2s;
       }
-      .win-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
+      .win-btn:hover { background: var(--btn-bg-hover); }
+      #close-btn:hover { background: var(--close-hover); }
+
+      #app-container { flex: 1; display: flex; transition: all 0.3s ease; }
+      .view-container {
+        flex: 1; display: flex; flex-direction: column;
+        border-right: 1px solid var(--divider); position: relative; min-width: 0;
       }
-      #close-btn:hover {
-        background: #e81123;
+      .view-container:last-child { border-right: none; }
+      .view-container.hidden { display: none; }
+      webview { flex: 1; width: 100%; height: 100%; }
+
+      .error-overlay {
+        position: absolute; inset: 0;
+        background: var(--error-bg); color: var(--error-fg);
+        display: none; align-items: center; justify-content: center;
+        flex-direction: column; gap: 12px; padding: 20px; text-align: center; z-index: 5;
+      }
+      .error-overlay.show { display: flex; }
+      .error-overlay .err-title { font-size: 16px; font-weight: 600; }
+      .error-overlay .err-body { font-size: 13px; opacity: 0.8; max-width: 360px; }
+      .error-overlay .err-actions { display: flex; gap: 8px; }
+      .error-overlay button {
+        padding: 6px 14px; border-radius: 4px; border: 1px solid var(--modal-border);
+        background: var(--btn-bg); color: var(--modal-fg); cursor: pointer; font-size: 12px;
+      }
+      .error-overlay button.primary {
+        background: var(--titlebar-grad-b); color: var(--text-on-purple); border-color: var(--titlebar-grad-b);
       }
 
-      /* Main container (split view support) */
-      #app-container {
-        flex: 1;
-        display: flex;
-        transition: all 0.3s ease;
-      }
-      
-      .view-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        border-right: 1px solid #d1b3e8; /* subtle divider */
-      }
-      
-      .view-container.hidden {
-        display: none;
-      }
-      
-      webview {
-        flex: 1;
-        width: 100%;
-        height: 100%;
-      }
-      
-      /* Footer */
       footer {
         height: 40px;
-        background: linear-gradient(90deg, #3a1072, #5a189a); /* Darker Purple Gradient */
-        border-top: 1px solid #380b6b;
-        padding: 0 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        color: #e0e1dd;
-        user-select: none;
-        position: relative;
+        background: linear-gradient(90deg, var(--footer-grad-a), var(--footer-grad-b));
+        border-top: 1px solid var(--footer-border);
+        padding: 0 15px; display: flex; align-items: center; justify-content: center;
+        font-size: 13px; color: var(--text-muted); user-select: none; position: relative;
       }
       footer a {
-        color: #d1b3e8; /* Light purple link */
-        text-decoration: none;
-        cursor: pointer;
-        font-weight: bold;
-        transition: color 0.2s;
+        color: var(--link); text-decoration: none; cursor: pointer;
+        font-weight: bold; transition: color 0.2s;
       }
-      footer a:hover {
-        color: #f3e8f8;
-        text-decoration: underline;
+      footer a:hover { color: var(--link-hover); text-decoration: underline; }
+      .footer-side-left { position: absolute; left: 15px; display: flex; align-items: center; }
+      .footer-center { display: flex; align-items: center; gap: 12px; }
+      .footer-side-right { position: absolute; right: 15px; display: flex; align-items: center; }
+
+      /* Settings modal */
+      .modal-backdrop {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+        display: none; align-items: center; justify-content: center; z-index: 1000;
       }
-      .footer-side-left {
-        position: absolute;
-        left: 15px;
-        display: flex;
-        align-items: center;
+      .modal-backdrop.show { display: flex; }
+      .modal {
+        background: var(--modal-bg); color: var(--modal-fg);
+        border: 1px solid var(--modal-border); border-radius: 8px;
+        width: 480px; max-width: 92vw; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
       }
-      .footer-center {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .modal h2 { margin: 0 0 14px; font-size: 16px; }
+      .modal .row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; gap: 12px; }
+      .modal .row label { font-size: 13px; }
+      .modal select, .modal input[type="text"] {
+        background: transparent; color: var(--modal-fg);
+        border: 1px solid var(--modal-border); border-radius: 4px;
+        padding: 4px 8px; font-size: 13px; min-width: 160px;
       }
-      .footer-side-right {
-        position: absolute;
-        right: 15px;
-        display: flex;
-        align-items: center;
+      .modal .footer-row { margin-top: 14px; display: flex; justify-content: flex-end; gap: 8px; }
+      .modal .footer-row button {
+        padding: 6px 14px; border-radius: 4px; border: 1px solid var(--modal-border);
+        background: transparent; color: var(--modal-fg); cursor: pointer; font-size: 12px;
       }
+      .modal .footer-row button.primary {
+        background: var(--titlebar-grad-b); color: var(--text-on-purple); border-color: var(--titlebar-grad-b);
+      }
+      .hotkey-capture { font-family: monospace; min-width: 200px; text-align: center; }
+      .hotkey-capture.recording { background: rgba(139, 60, 206, 0.2); }
+      .status-msg { font-size: 11px; opacity: 0.7; margin-top: 4px; min-height: 14px; }
     </style>
   </head>
-  <body>
-    <!-- Custom Title Bar -->
+  <body data-theme="light">
     <div id="titlebar">
       <div id="titlebar-left">
-        <span id="titlebar-title">NotebookLM-for-Windows v2</span>
+        <span id="titlebar-title">NotebookLM-for-Windows v3</span>
       </div>
       <div id="titlebar-middle">
         <label class="control-group" title="Ghost Mode (Transparency)">
           Opacity
           <input type="range" id="opacity-slider" min="0.2" max="1.0" step="0.05" value="1.0">
         </label>
-        <button id="split-toggle" class="tbtn">Split View</button>
+        <button id="pane-toggle" class="tbtn" title="Cycle 1 / 2 / 3 panes">Panes: 1</button>
+        <button id="pin-toggle" class="tbtn" title="Always on top">📌 Pin</button>
+        <button id="theme-toggle" class="tbtn" title="Toggle theme">🌙</button>
+        <button id="export-btn" class="tbtn" title="Export notes as Markdown">⬇ Export</button>
+        <button id="settings-btn" class="tbtn" title="Settings">⚙</button>
       </div>
       <div id="titlebar-right">
         <button class="win-btn" id="min-btn">&#xE921;</button>
@@ -179,26 +181,38 @@
     </div>
 
     <div id="app-container">
-      <!-- NotebookLM WebView 1 -->
-      <div class="view-container" id="view1-container">
-        <webview
-          id="notebookView1"
-          src="https://notebooklm.google.com/"
-          partition="persist:notebooklm"
-          preload="./webview-preload.js"
-          allowpopups
-        ></webview>
+      <div class="view-container" id="view1-container" data-pane="1">
+        <webview id="notebookView1" src="https://notebooklm.google.com/" partition="persist:notebooklm" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err1">
+          <div class="err-title">Couldn't reach NotebookLM</div>
+          <div class="err-body" id="err1-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView1">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
       </div>
-
-      <!-- NotebookLM WebView 2 (Split View) -->
-      <div class="view-container hidden" id="view2-container">
-        <webview
-          id="notebookView2"
-          src="https://notebooklm.google.com/"
-          partition="persist:notebooklm"
-          preload="./webview-preload.js"
-          allowpopups
-        ></webview>
+      <div class="view-container hidden" id="view2-container" data-pane="2">
+        <webview id="notebookView2" src="https://notebooklm.google.com/" partition="persist:notebooklm" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err2">
+          <div class="err-title">Couldn't reach NotebookLM</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView2">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view3-container" data-pane="3">
+        <webview id="notebookView3" src="https://notebooklm.google.com/" partition="persist:notebooklm" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err3">
+          <div class="err-title">Couldn't reach NotebookLM</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView3">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -210,11 +224,11 @@
       </div>
       <div class="footer-center">
         <div class="branding">
-          built with <span style="color: #ff006e;">&hearts;</span> by 
+          built with <span style="color: #ff006e;">&hearts;</span> by
           <a href="#" onclick="openLink('https://www.linkedin.com/in/gyanesh-samanta/')">Gyanesh Samanta</a>
         </div>
         <span style="opacity: 0.5; font-size: 12px; margin: 0 5px;">|</span>
-        <span style="font-size: 12px; color: #f3e8f8; font-weight: 500;">Follow for more:</span>
+        <span style="font-size: 12px; color: var(--link-hover); font-weight: 500;">Follow for more:</span>
         <a href="#" onclick="openLink('https://www.linkedin.com/newsletters/gyanesh-on-product-6979386586404651008/')">Newsletter</a>
         <a href="#" onclick="openLink('https://github.com/GyaneshSamanta')">GitHub</a>
       </div>
@@ -222,6 +236,42 @@
         <a href="#" onclick="openLink('https://buymeachai.ezee.li/GyaneshOnProduct')" style="background: #FFDD00; color: #000; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 12px;">☕ Buy Me A Chai</a>
       </div>
     </footer>
+
+    <!-- Settings modal -->
+    <div class="modal-backdrop" id="settings-modal">
+      <div class="modal">
+        <h2>Settings</h2>
+        <div class="row">
+          <label for="theme-select">Theme</label>
+          <select id="theme-select">
+            <option value="system">Follow system</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Quick-Clip hotkey</label>
+          <input type="text" class="hotkey-capture" id="hotkey-input" readonly placeholder="Click and press a combo">
+        </div>
+        <div class="status-msg" id="hotkey-status"></div>
+        <div class="row">
+          <label for="always-on-top-cb">Always on top</label>
+          <input type="checkbox" id="always-on-top-cb">
+        </div>
+        <div class="row">
+          <label for="pane-count-select">Default pane count on launch</label>
+          <select id="pane-count-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="footer-row">
+          <button id="settings-close">Close</button>
+        </div>
+      </div>
+    </div>
+
     <script src="renderer.js"></script>
     <script>
       document.getElementById('min-btn').innerText = '—';

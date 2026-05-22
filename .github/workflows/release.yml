@@ -1,0 +1,83 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Build (Windows)
+        if: matrix.os == 'windows-latest'
+        run: npm run dist:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build (macOS)
+        if: matrix.os == 'macos-latest'
+        run: npm run dist:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Code-signing left intentionally unset for now; users see Gatekeeper warning.
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+
+      - name: Build (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: npm run dist:linux
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.os }}
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.zip
+            dist/*.AppImage
+            dist/*.deb
+          if-no-files-found: ignore
+
+  release:
+    name: Publish release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Publish to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          prerelease: ${{ contains(github.ref, '-beta') || contains(github.ref, '-rc') || contains(github.ref, '-alpha') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

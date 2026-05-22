@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quick-Clip</title>
+    <style>
+      html, body {
+        margin: 0; padding: 0; height: 100%; width: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: transparent; overflow: hidden;
+      }
+      .card {
+        height: 100%; box-sizing: border-box;
+        background: linear-gradient(135deg, #2a0a4a, #4a1773);
+        color: #f0e6ff; border-radius: 10px;
+        padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+        border: 1px solid rgba(255,255,255,0.08);
+        -webkit-app-region: drag;
+      }
+      .header { display: flex; align-items: center; justify-content: space-between; font-size: 11px; opacity: 0.8; }
+      .preview {
+        flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px;
+        padding: 6px 8px; font-size: 12px; overflow: hidden; text-overflow: ellipsis;
+        white-space: nowrap; -webkit-app-region: no-drag;
+      }
+      .preview.empty { opacity: 0.5; font-style: italic; }
+      .actions {
+        display: flex; gap: 8px; justify-content: flex-end; -webkit-app-region: no-drag;
+      }
+      button {
+        background: rgba(255,255,255,0.12); color: #f0e6ff;
+        border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+        padding: 4px 10px; font-size: 11px; cursor: pointer;
+      }
+      button.primary { background: #8b3cce; border-color: #8b3cce; }
+      button:hover { filter: brightness(1.15); }
+      .hint { font-size: 10px; opacity: 0.6; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <span>⚡ Quick-Clip</span>
+        <span class="hint">Enter to clip · Esc to cancel</span>
+      </div>
+      <div class="preview empty" id="preview">No clipboard text</div>
+      <div class="actions">
+        <button id="cancel">Cancel</button>
+        <button id="confirm" class="primary">Clip to NotebookLM</button>
+      </div>
+    </div>
+    <script>
+      let currentText = '';
+      const preview = document.getElementById('preview');
+      const confirmBtn = document.getElementById('confirm');
+      const cancelBtn = document.getElementById('cancel');
+
+      function setText(text) {
+        currentText = text || '';
+        if (currentText) {
+          preview.textContent = currentText.length > 200 ? currentText.slice(0, 200) + '…' : currentText;
+          preview.classList.remove('empty');
+          confirmBtn.disabled = false;
+        } else {
+          preview.textContent = 'No clipboard text';
+          preview.classList.add('empty');
+          confirmBtn.disabled = true;
+        }
+      }
+
+      if (window.api && window.api.onQuickClipText) {
+        window.api.onQuickClipText(setText);
+      }
+
+      confirmBtn.addEventListener('click', () => window.api && window.api.quickClipConfirm(currentText));
+      cancelBtn.addEventListener('click', () => window.api && window.api.quickClipCancel());
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); window.api && window.api.quickClipConfirm(currentText); }
+        if (e.key === 'Escape') { e.preventDefault(); window.api && window.api.quickClipCancel(); }
+      });
+
+      // Focus so Enter/Esc work immediately
+      window.addEventListener('DOMContentLoaded', () => window.focus());
+    </script>
+  </body>
+</html>
