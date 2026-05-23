@@ -129,11 +129,27 @@ See [**all open issues**](https://github.com/GyaneshSamanta/NotebookLM-for-Windo
 
 ---
 
-## Gallery
+## Gallery — v3 in action
 
-![Split view demo 1 — brain-activity research alongside a secondary pane](assets/split-view-1.png)
+**Three-pane multi-view** — research three notebooks at once, all sharing the same login session.
 
-![Split view demo 2 — connectomics study guide next to a Q3 acceleration briefing](assets/split-view-2.png)
+![Three-pane multi-view in dark mode](assets/v3-dark-3pane.png)
+
+**Split view** — two notebooks side-by-side.
+
+![Split view in dark mode](assets/v3-dark-2pane.png)
+
+**Settings panel** — theme, customizable hotkey, always-on-top, and default pane count, all in one place.
+
+![Settings modal](assets/v3-settings-modal.png)
+
+**Light mode** — the classic deep-purple chrome.
+
+![Single pane in light mode](assets/v3-light-single.png)
+
+**Dark mode** — quieter palette for late-night research.
+
+![Single pane in dark mode](assets/v3-dark-single.png)
 
 ---
 
