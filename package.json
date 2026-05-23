@@ -1,20 +1,23 @@
 {
   "name": "notebooklm-for-windows",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "Native cross-platform desktop wrapper for Google NotebookLM",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "dist:win": "electron-builder --win",
-    "dist:mac": "electron-builder --mac",
-    "dist:linux": "electron-builder --linux",
-    "dist:all": "electron-builder -mwl",
+    "dist": "electron-builder --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:linux": "electron-builder --linux --publish never",
+    "dist:all": "electron-builder -mwl --publish never",
     "test": "playwright test",
     "test:smoke": "playwright test tests/smoke"
   },
-  "author": "Gyanesh Samanta",
+  "author": {
+    "name": "Gyanesh Samanta",
+    "email": "mail.gyaneshsamanta@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@electron/packager": "^18.3.2",
