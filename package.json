@@ -1,6 +1,6 @@
 {
   "name": "notebooklm-for-windows",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "description": "Native cross-platform desktop wrapper for Google NotebookLM",
   "main": "src/main.js",
   "scripts": {
