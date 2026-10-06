@@ -72,6 +72,13 @@ paneContainers.forEach(({ webviewId, errorId }) => {
         }
     });
     wv.addEventListener('did-finish-load', () => overlay.classList.remove('show'));
+    wv.addEventListener('render-process-gone', (e) => {
+        overlay.classList.add('show');
+        const body = overlay.querySelector('.err-body');
+        if (body) {
+            body.textContent = `Renderer process crashed (${e.reason || 'unknown reason'}). Click below to reload the pane.`;
+        }
+    });
 });
 
 document.querySelectorAll('[data-retry]').forEach(btn => {
