@@ -22,7 +22,7 @@
 </div>
 
 > [!NOTE]
-> **🎉 Thank you for 5,000+ downloads.** From a frameless Electron wrapper in February to a cross-platform research studio in May — every bug report, feature request, and 20-rupee [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) (UPI supported) shaped what landed in v3.0. The project is now openly accepting contributions — see the [**Roadmap**](#-roadmap--v3-and-beyond) below for `good first issue` work that could ship in the next release.
+> **🎉 Thank you for 11,000+ downloads.** From a frameless Electron wrapper in February to a cross-platform research studio in May — every bug report, feature request, and 20-rupee [Buy Me A Chai](https://buymeachai.ezee.li/GyaneshOnProduct) (UPI supported) shaped what landed in v3.0. The project is now openly accepting contributions — see the [**Roadmap**](#-roadmap--v3-and-beyond) below for `good first issue` work that could ship in the next release.
 
 ---
 
@@ -34,7 +34,7 @@
 
 **When.** Active from **February 8, 2026 onwards** — v1.0 (wrapper), v2.0 (Ghost Mode + Quick-Clip + Split View), v2.1 (installer + auto-update), v3.0 (cross-platform + power-user features + open-source foundation).
 
-**Where.** A nights-and-weekends project now in the hands of **5,000+** researchers, students, and analysts on Windows, macOS, and Linux who wanted NotebookLM to behave like a first-class desktop app.
+**Where.** A nights-and-weekends project now in the hands of **11,000+** researchers, students, and analysts on Windows, macOS, and Linux who wanted NotebookLM to behave like a first-class desktop app.
 
 **Why.** NotebookLM is a phenomenal research tool — but living in a browser tab means you lose half its leverage. No global hotkey to capture a clipping. No transparency to reference a PDF underneath. No way to compare two notebooks side-by-side without two browser windows. This app fixes all of that.
 
@@ -48,7 +48,7 @@ Version 2.0 was the leap. **Ghost Mode** added an opacity slider to the title ba
 
 Version 2.1 was the boring-but-important release: a real NSIS installer, an electron-updater pipeline that ships updates in the background, and a portable `.exe` for users who don't want anything touching their registry. The whole stack stays delightfully thin — Electron 34, vanilla JS/HTML/CSS, two runtime deps (`auto-launch`, `electron-updater`).
 
-**Version 3.0 is the 5,000-download milestone release.** It's the leap from "a Windows app for me" to "a research tool worth contributing to." A unified **settings system** with a real preferences panel. **Dark mode** with a proper CSS-variable palette. **Customizable global hotkeys** so power users can rebind Quick-Clip to whatever fits their muscle memory. **Always-on-top** for reference workflows. **Three-pane multi-view** for the research geeks. A **mini Quick-Clip overlay** that pops up at the cursor when the main window is hidden — no more forced foregrounding. **Markdown export** of your notes. **URL drop capture** so dragging a link from the browser pushes it as a source. And — finally — **macOS and Linux** builds via a cross-platform CI pipeline, with issue templates and a curated `good first issue` backlog so anyone reading this can ship the next feature.
+**Version 3.0 is the 11,000-download milestone release.** It's the leap from "a Windows app for me" to "a research tool worth contributing to." A unified **settings system** with a real preferences panel. **Dark mode** with a proper CSS-variable palette. **Customizable global hotkeys** so power users can rebind Quick-Clip to whatever fits their muscle memory. **Always-on-top** for reference workflows. **Three-pane multi-view** for the research geeks. A **mini Quick-Clip overlay** that pops up at the cursor when the main window is hidden — no more forced foregrounding. **Markdown export** of your notes. **URL drop capture** so dragging a link from the browser pushes it as a source. And — finally — **macOS and Linux** builds via a cross-platform CI pipeline, with issue templates and a curated `good first issue` backlog so anyone reading this can ship the next feature.
 
 ---
 
@@ -265,7 +265,7 @@ Want to be in this list? Pick a [`good first issue`](https://github.com/GyaneshS
 ## Credits
 
 - **Gyanesh Samanta** — author, maintainer, designer ([LinkedIn](https://www.linkedin.com/in/gyanesh-samanta/) · [@GyaneshSamanta](https://github.com/GyaneshSamanta))
-- And **5,000+ downloaders** whose bug reports and feature requests shaped v2.0, v2.1, and v3.0.
+- And **11,000+ downloaders** whose bug reports and feature requests shaped v2.0, v2.1, and v3.0.
 
 <div align="center">
   <p>Built with care for the Windows research community.</p>
