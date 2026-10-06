@@ -297,6 +297,8 @@ ipcMain.on('show-notification', (event, { title, body }) => {
 
 ipcMain.on('open-external', (event, url) => shell.openExternal(url));
 
+ipcMain.handle('get-app-version', () => app.getVersion());
+
 ipcMain.handle('get-auto-launch', async () => {
     return await appLauncher.isEnabled();
 });

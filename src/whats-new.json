@@ -1,0 +1,23 @@
+{
+  "3.0.0": [
+    "macOS + Linux support via cross-platform builds",
+    "Dark Mode with full theme support",
+    "Unified Settings Panel",
+    "Customizable Quick-Clip hotkey",
+    "Always-on-top window mode",
+    "3-Pane view for multi-tasking",
+    "Mini Quick-Clip overlay when app is hidden",
+    "Markdown Export for notes",
+    "URL Drop Capture"
+  ],
+  "2.1.0": [
+    "Installer + auto-update via electron-updater",
+    "Portable .exe build option"
+  ],
+  "2.0.0": [
+    "Ghost Mode with adjustable opacity",
+    "Quick-Clip global hotkey (Ctrl+Alt+N)",
+    "Split view for multiple notes",
+    "Native drag & drop"
+  ]
+}
