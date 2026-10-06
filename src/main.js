@@ -241,8 +241,8 @@ app.whenReady().then(() => {
     // Auto-launch follows settings
     appLauncher.isEnabled().then((isEnabled) => {
         const want = settings.get('autoLaunch');
-        if (want && !isEnabled) appLauncher.enable();
-        if (!want && isEnabled) appLauncher.disable();
+        if (want && !isEnabled) appLauncher.enable().catch(console.error);
+        if (!want && isEnabled) appLauncher.disable().catch(console.error);
     }).catch((err) => console.error('Auto-launch error:', err));
 
     registerQuickClip(settings.get('quickClipAccelerator'));
@@ -254,7 +254,9 @@ app.whenReady().then(() => {
     });
 
     autoUpdater.allowPrerelease = false;
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdatesAndNotify().catch(err => {
+        console.error('Update check failed:', err);
+    });
 });
 
 app.on('will-quit', () => {
@@ -304,8 +306,12 @@ ipcMain.handle('get-auto-launch', async () => {
 });
 
 ipcMain.handle('set-auto-launch', async (event, enable) => {
-    if (enable) await appLauncher.enable(); else await appLauncher.disable();
-    settings.set('autoLaunch', !!enable);
+    try {
+        if (enable) await appLauncher.enable(); else await appLauncher.disable();
+        settings.set('autoLaunch', !!enable);
+    } catch (e) {
+        console.error('set-auto-launch error:', e);
+    }
     return enable;
 });
 
@@ -389,4 +395,8 @@ autoUpdater.on('update-downloaded', () => {
         title: 'Update Ready',
         body: 'The new version has been downloaded and will be installed when you restart the app.',
     }).show();
+});
+
+autoUpdater.on('error', (err) => {
+    console.error('auto-updater error:', err);
 });
