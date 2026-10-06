@@ -217,6 +217,8 @@ const paneCountSelect = $('pane-count-select');
 async function openSettings() {
     if (!window.api) return;
     const s = await window.api.settingsGetAll();
+        const v = await window.api.getAppVersion();
+        document.getElementById('titlebar-title').textContent = `Gemini Notebook v${v}`;
     themeSelect.value = s.theme || 'system';
     alwaysOnTopCb.checked = !!s.alwaysOnTop;
     paneCountSelect.value = String(s.paneCount || 1);
@@ -286,6 +288,8 @@ hotkeyInput.addEventListener('keydown', async (e) => {
     if (!window.api) return;
     try {
         const s = await window.api.settingsGetAll();
+        const v = await window.api.getAppVersion();
+        document.getElementById('titlebar-title').textContent = `Gemini Notebook v${v}`;
         applyPaneCount(s.paneCount || 1);
         updatePinUI(!!s.alwaysOnTop);
         // Theme will be pushed via theme-changed event after did-finish-load
