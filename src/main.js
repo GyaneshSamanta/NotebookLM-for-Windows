@@ -24,8 +24,10 @@ const appLauncher = new AutoLaunch({ name: 'Gemini-Notebook-for-Windows' });
 function createWindow() {
     const initialOpacity = settings.get('opacity');
     const alwaysOnTop = settings.get('alwaysOnTop');
+    const windowBounds = settings.get('windowBounds');
+    const windowMaximized = settings.get('windowMaximized');
 
-    mainWindow = new BrowserWindow({
+    let windowConfig = {
         width: 1200,
         height: 800,
         frame: false,
@@ -39,7 +41,16 @@ function createWindow() {
         },
         autoHideMenuBar: true,
         alwaysOnTop: !!alwaysOnTop,
-    });
+    };
+    if (windowBounds) {
+        Object.assign(windowConfig, windowBounds);
+    }
+
+    mainWindow = new BrowserWindow(windowConfig);
+
+    if (windowMaximized) {
+        mainWindow.maximize();
+    }
 
     if (typeof initialOpacity === 'number') {
         mainWindow.setOpacity(initialOpacity);
@@ -48,6 +59,11 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
     mainWindow.on('close', (event) => {
+        if (!mainWindow.isMaximized()) {
+            settings.set('windowBounds', mainWindow.getBounds());
+        }
+        settings.set('windowMaximized', mainWindow.isMaximized());
+
         if (!isQuitting) {
             event.preventDefault();
             mainWindow.hide();
@@ -225,8 +241,8 @@ app.whenReady().then(() => {
     // Auto-launch follows settings
     appLauncher.isEnabled().then((isEnabled) => {
         const want = settings.get('autoLaunch');
-        if (want && !isEnabled) appLauncher.enable();
-        if (!want && isEnabled) appLauncher.disable();
+        if (want && !isEnabled) appLauncher.enable().catch(console.error);
+        if (!want && isEnabled) appLauncher.disable().catch(console.error);
     }).catch((err) => console.error('Auto-launch error:', err));
 
     registerQuickClip(settings.get('quickClipAccelerator'));
@@ -238,7 +254,9 @@ app.whenReady().then(() => {
     });
 
     autoUpdater.allowPrerelease = false;
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdatesAndNotify().catch(err => {
+        console.error('Update check failed:', err);
+    });
 });
 
 app.on('will-quit', () => {
@@ -281,13 +299,19 @@ ipcMain.on('show-notification', (event, { title, body }) => {
 
 ipcMain.on('open-external', (event, url) => shell.openExternal(url));
 
+ipcMain.handle('get-app-version', () => app.getVersion());
+
 ipcMain.handle('get-auto-launch', async () => {
     return await appLauncher.isEnabled();
 });
 
 ipcMain.handle('set-auto-launch', async (event, enable) => {
-    if (enable) await appLauncher.enable(); else await appLauncher.disable();
-    settings.set('autoLaunch', !!enable);
+    try {
+        if (enable) await appLauncher.enable(); else await appLauncher.disable();
+        settings.set('autoLaunch', !!enable);
+    } catch (e) {
+        console.error('set-auto-launch error:', e);
+    }
     return enable;
 });
 
@@ -371,4 +395,8 @@ autoUpdater.on('update-downloaded', () => {
         title: 'Update Ready',
         body: 'The new version has been downloaded and will be installed when you restart the app.',
     }).show();
+});
+
+autoUpdater.on('error', (err) => {
+    console.error('auto-updater error:', err);
 });

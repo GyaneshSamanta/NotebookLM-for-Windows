@@ -72,6 +72,13 @@ paneContainers.forEach(({ webviewId, errorId }) => {
         }
     });
     wv.addEventListener('did-finish-load', () => overlay.classList.remove('show'));
+    wv.addEventListener('render-process-gone', (e) => {
+        overlay.classList.add('show');
+        const body = overlay.querySelector('.err-body');
+        if (body) {
+            body.textContent = `Renderer process crashed (${e.reason || 'unknown reason'}). Click below to reload the pane.`;
+        }
+    });
 });
 
 document.querySelectorAll('[data-retry]').forEach(btn => {
@@ -285,3 +292,38 @@ hotkeyInput.addEventListener('keydown', async (e) => {
         applyTheme(s.theme === 'dark' ? 'dark' : 'light');
     } catch (e) { console.error('init settings', e); }
 })();
+
+// ---------- What's New ----------
+async function checkWhatsNew() {
+    if (!window.api || !window.api.getAppVersion) return;
+    try {
+        const appVersion = await window.api.getAppVersion();
+        const settings = await window.api.settingsGetAll();
+        const lastShownVersion = settings.lastShownVersion;
+
+        if (lastShownVersion !== appVersion) {
+            const whatsNewRes = await fetch('./whats-new.json');
+            const whatsNewData = await whatsNewRes.json();
+            
+            const highlights = whatsNewData[appVersion];
+            if (highlights && highlights.length > 0) {
+                const modal = document.getElementById('whats-new-modal');
+                const content = document.getElementById('whats-new-content');
+                
+                content.innerHTML = '<ul>' + highlights.map(h => `<li>${h}</li>`).join('') + '</ul>';
+                modal.classList.add('show');
+                
+                document.getElementById('whats-new-dismiss').addEventListener('click', () => {
+                    modal.classList.remove('show');
+                    window.api.settingsSet('lastShownVersion', appVersion);
+                }, { once: true });
+            } else {
+                // If no specific highlights for this version, just update the version
+                window.api.settingsSet('lastShownVersion', appVersion);
+            }
+        }
+    } catch (err) {
+        console.error("Failed to check what's new:", err);
+    }
+}
+checkWhatsNew();

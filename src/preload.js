@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('api', {
     getAutoLaunch: () => ipcRenderer.invoke('get-auto-launch'),
     setAutoLaunch: (enable) => ipcRenderer.invoke('set-auto-launch', enable),
     openExternal: (url) => ipcRenderer.send('open-external', url),
+    getAppVersion: () => ipcRenderer.invoke('get-app-version'),
 
     // Window controls
     windowAction: (action) => ipcRenderer.send('window-controls', action),
