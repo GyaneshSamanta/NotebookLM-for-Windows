@@ -1,6 +1,6 @@
 {
   "name": "gemini-notebook-for-windows",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Native cross-platform desktop wrapper for Google Gemini Notebook",
   "main": "src/main.js",
   "scripts": {
@@ -42,7 +42,10 @@
       "package.json"
     ],
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "assets/icon.png"
     },
     "nsis": {
@@ -57,7 +60,10 @@
       "artifactName": "Gemini-Notebook-for-Windows-v${version}.${ext}"
     },
     "mac": {
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "icon": "assets/icon.png",
       "category": "public.app-category.productivity",
       "darkModeSupport": true,
@@ -67,7 +73,10 @@
       "artifactName": "Gemini-Notebook-for-Mac-v${version}.${ext}"
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "icon": "assets/icon.png",
       "category": "Office",
       "artifactName": "Gemini-Notebook-for-Linux-v${version}.${ext}"
