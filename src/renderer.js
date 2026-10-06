@@ -43,14 +43,7 @@ paneToggle.addEventListener('click', () => {
     if (window.api) window.api.settingsSet('paneCount', next);
 });
 
-// Track active pane via focus events on webviews
-paneContainers.forEach((p, i) => {
-    const wv = $(p.webviewId);
-    if (!wv) return;
-    wv.addEventListener('focus', () => { activePaneIndex = i; });
-    // Webview clicks bubble through host; use mouseenter as a hint
-    wv.addEventListener('mouseenter', () => { activePaneIndex = i; });
-});
+
 
 function getActiveWebview() {
     const idx = activePaneIndex < paneCount ? activePaneIndex : 0;
@@ -286,6 +279,30 @@ hotkeyInput.addEventListener('keydown', async (e) => {
     if (!window.api) return;
     try {
         const s = await window.api.settingsGetAll();
+        const activeProfile = s.activeProfile || 'default';
+        const partition = activeProfile === 'default' ? 'persist:gemini-notebook' : `persist:gemini-notebook-${activeProfile}`;
+        
+        paneContainers.forEach(p => {
+            const wv = document.createElement('webview');
+            wv.id = p.webviewId;
+            wv.setAttribute('src', 'https://notebook.google.com/');
+            wv.setAttribute('partition', partition);
+            wv.setAttribute('preload', './webview-preload.js');
+            wv.setAttribute('allowpopups', 'true');
+            p.container.insertBefore(wv, $(p.errorId));
+        });
+        
+        attachWebviewListeners();
+        
+        $('profile-select').value = activeProfile;
+        $('profile-select').addEventListener('change', (e) => {
+            window.api.settingsSet('activeProfile', e.target.value);
+            // Must reload the app to apply partition changes
+            if (confirm("Profile changed. The app needs to reload. Continue?")) {
+                window.api.windowAction('reload');
+            }
+        });
+
         applyPaneCount(s.paneCount || 1);
         updatePinUI(!!s.alwaysOnTop);
         // Theme will be pushed via theme-changed event after did-finish-load

@@ -281,6 +281,7 @@ ipcMain.on('window-controls', (event, action) => {
             mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
             break;
         case 'close': mainWindow.close(); break;
+        case 'reload': mainWindow.reload(); break;
     }
 });
 
