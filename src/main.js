@@ -24,8 +24,10 @@ const appLauncher = new AutoLaunch({ name: 'NotebookLM-for-Windows' });
 function createWindow() {
     const initialOpacity = settings.get('opacity');
     const alwaysOnTop = settings.get('alwaysOnTop');
+    const windowBounds = settings.get('windowBounds');
+    const windowMaximized = settings.get('windowMaximized');
 
-    mainWindow = new BrowserWindow({
+    let windowConfig = {
         width: 1200,
         height: 800,
         frame: false,
@@ -39,7 +41,16 @@ function createWindow() {
         },
         autoHideMenuBar: true,
         alwaysOnTop: !!alwaysOnTop,
-    });
+    };
+    if (windowBounds) {
+        Object.assign(windowConfig, windowBounds);
+    }
+
+    mainWindow = new BrowserWindow(windowConfig);
+
+    if (windowMaximized) {
+        mainWindow.maximize();
+    }
 
     if (typeof initialOpacity === 'number') {
         mainWindow.setOpacity(initialOpacity);
@@ -48,6 +59,11 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
     mainWindow.on('close', (event) => {
+        if (!mainWindow.isMaximized()) {
+            settings.set('windowBounds', mainWindow.getBounds());
+        }
+        settings.set('windowMaximized', mainWindow.isMaximized());
+
         if (!isQuitting) {
             event.preventDefault();
             mainWindow.hide();
