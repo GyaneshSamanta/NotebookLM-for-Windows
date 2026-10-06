@@ -169,7 +169,7 @@ paneContainers.forEach(p => setupWebviewEvents(p.webviewId));
 if (window.api) {
     window.api.onQuickClip((text) => {
         const wv = getActiveWebview();
-        try { loadLocale("en"); wv.send('quick-clip-paste', text); }
+        try { wv.send('quick-clip-paste', text); }
         catch (e) { console.error("Could not send to webview", e); }
     });
 }
@@ -186,14 +186,14 @@ document.addEventListener('drop', (e) => {
     const uri = dt.getData('text/uri-list') || dt.getData('text/plain');
     if (uri && /^https?:\/\//i.test(uri.trim())) {
         const wv = getActiveWebview();
-        try { loadLocale("en"); wv.send('url-drop', uri.trim()); } catch (err) { console.error(err); }
+        try { wv.send('url-drop', uri.trim()); } catch (err) { console.error(err); }
         return;
     }
 
     if (dt.files && dt.files.length > 0) {
         const filePaths = Array.from(dt.files).map(f => f.path);
         const wv = getActiveWebview();
-        try { loadLocale("en"); wv.send('file-drop', filePaths); } catch (err) { console.error(err); }
+        try { wv.send('file-drop', filePaths); } catch (err) { console.error(err); }
     }
 });
 
@@ -203,7 +203,7 @@ $('export-btn').addEventListener('click', () => {
     const wv = getActiveWebview();
     if (!wv) return;
     pendingExport = true;
-    try { loadLocale("en"); wv.send('extract-notes'); }
+    try { wv.send('extract-notes'); }
     catch (e) { pendingExport = false; console.error(e); }
 });
 
@@ -237,6 +237,8 @@ const paneCountSelect = $('pane-count-select');
 async function openSettings() {
     if (!window.api) return;
     const s = await window.api.settingsGetAll();
+        const v = await window.api.getAppVersion();
+        document.getElementById('titlebar-title').textContent = `Gemini Notebook v${v}`;
     themeSelect.value = s.theme || 'system';
     alwaysOnTopCb.checked = !!s.alwaysOnTop;
     paneCountSelect.value = String(s.paneCount || 1);
@@ -304,8 +306,11 @@ hotkeyInput.addEventListener('keydown', async (e) => {
 // ---------- Init from settings ----------
 (async function init() {
     if (!window.api) return;
-    try { loadLocale("en");
+    try {
+        loadLocale("en");
         const s = await window.api.settingsGetAll();
+        const v = await window.api.getAppVersion();
+        document.getElementById('titlebar-title').textContent = `Gemini Notebook v${v}`;
         const activeProfile = s.activeProfile || 'default';
         const partition = activeProfile === 'default' ? 'persist:gemini-notebook' : `persist:gemini-notebook-${activeProfile}`;
         
@@ -324,12 +329,10 @@ hotkeyInput.addEventListener('keydown', async (e) => {
         $('profile-select').value = activeProfile;
         $('profile-select').addEventListener('change', (e) => {
             window.api.settingsSet('activeProfile', e.target.value);
-            // Must reload the app to apply partition changes
             if (confirm("Profile changed. The app needs to reload. Continue?")) {
                 window.api.windowAction('reload');
             }
         });
-
         applyPaneCount(s.paneCount || 1);
         updatePinUI(!!s.alwaysOnTop);
         // Theme will be pushed via theme-changed event after did-finish-load
@@ -340,7 +343,7 @@ hotkeyInput.addEventListener('keydown', async (e) => {
 // ---------- What's New ----------
 async function checkWhatsNew() {
     if (!window.api || !window.api.getAppVersion) return;
-    try { loadLocale("en");
+    try {
         const appVersion = await window.api.getAppVersion();
         const settings = await window.api.settingsGetAll();
         const lastShownVersion = settings.lastShownVersion;
