@@ -212,6 +212,8 @@ function showQuickClipOverlay(text) {
     });
 }
 
+settings.subscribe((key, value) => { if (key === 'theme') { nativeTheme.themeSource = value; sendThemeToRenderer(); } });
+
 function sendThemeToRenderer() {
     if (!mainWindow || mainWindow.isDestroyed()) return;
     const themePref = settings.get('theme');
@@ -223,6 +225,7 @@ function sendThemeToRenderer() {
 
 app.whenReady().then(() => {
     settings.init();
+    nativeTheme.themeSource = settings.get('theme');
 
     try {
         session.fromPartition('persist:gemini-notebook', { cache: true });
@@ -281,6 +284,7 @@ ipcMain.on('window-controls', (event, action) => {
             mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
             break;
         case 'close': mainWindow.close(); break;
+        case 'reload': mainWindow.reload(); break;
     }
 });
 

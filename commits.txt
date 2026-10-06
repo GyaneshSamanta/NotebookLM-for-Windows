@@ -1,0 +1,31 @@
+f1f6f3c feat: rebrand to Gemini Notebook (updates URLs and titles) (#23)
+a1c0ec5 fix: ensure mac and linux compatibility by handling unhandled promise rejections (#22)
+f670c88 feat: show what's new panel on first launch after update (fixes #14) (#21)
+f00e975 fix: handle render-process-gone crash (fixes #13) (#20)
+4707f51 feat: persist and restore window bounds (fixes #7) (#19)
+e86d53b docs: update downloads messaging to 11k (#18)
+f4b99fb docs: replace v2 split-view screenshots with v3 gallery
+c9af142 chore: cut v3.0.0 stable release
+e9413e0 ci: fix cross-platform build failures
+2ec097c ci: drop npm cache requirement and bump to v3.0.0-beta.2
+74bdfdb feat: v3.0 — 5k milestone release with cross-platform, dark mode, settings, and contributor foundation
+f4cdbb8 docs: overhaul README with hero, story, and technical sections
+8edfaf2 chore: update download count to 2k+ and add thank you message
+180fdb0 chore: optimize build size by excluding dist from app package
+8279593 chore: bump version to 2.1.0 and switch to electron-builder
+cd01f2a Update README: 20 rs minimum contribution and UPI mention
+7d57168 Update README: 400+ downloads and move support section to header
+0256c75 Fix README encoding and add CONTRIBUTING.md (closes #6)
+abcead8 🐛 fix images
+dde32cb Add split-view showcase
+9c95d2c chore: bump version to v2.0.1
+16885f1 refactor: reorganize source files into src directory
+504f23e feat: release NotebookLM-for-Windows v2.0.0
+c27053e Rebranding to NotebookLM-for-Windows, update donation to Buy Me A Chai, and celebrate 150 downloads
+19ca25b fix: minor typos
+eaa3e95 docs: Add latest release and total downloads badges to README.
+bcda401  docs: Update README with Buy Me a Coffee button and latest features
+195a11c  feat: Add Buy Me a Coffee button, persistent login fix, build improvements
+a1f2f68 feat: Add persistent login - session data persists across app restarts
+c1d9200 feat: NotebookGLM Desktop - Native Windows wrapper for NotebookLM with notifications and system tray
+d27c689 Initial commit

@@ -16,41 +16,61 @@ if (window.api) {
     opacitySlider.addEventListener('input', (e) => window.api.setOpacity(parseFloat(e.target.value)));
 }
 
-// ---------- Pane manager (1 / 2 / 3 panes) ----------
+// ---------- Pane manager (up to 6 panes) ----------
 const paneContainers = [
     { container: $('view1-container'), webviewId: 'notebookView1', errorId: 'err1' },
     { container: $('view2-container'), webviewId: 'notebookView2', errorId: 'err2' },
     { container: $('view3-container'), webviewId: 'notebookView3', errorId: 'err3' },
+    { container: $('view4-container'), webviewId: 'notebookView4', errorId: 'err4' },
+    { container: $('view5-container'), webviewId: 'notebookView5', errorId: 'err5' },
+    { container: $('view6-container'), webviewId: 'notebookView6', errorId: 'err6' },
 ];
 let paneCount = 1;
 let activePaneIndex = 0;
 
 const paneToggle = $('pane-toggle');
+const appContainer = $('app-container');
 
 function applyPaneCount(n) {
-    paneCount = Math.max(1, Math.min(3, n));
+    const validPanes = [1, 2, 3, 4, 6];
+    paneCount = validPanes.includes(n) ? n : 1;
+    
     paneContainers.forEach((p, i) => {
         if (i < paneCount) p.container.classList.remove('hidden');
         else p.container.classList.add('hidden');
     });
+    
     paneToggle.textContent = `Panes: ${paneCount}`;
     if (activePaneIndex >= paneCount) activePaneIndex = 0;
+    
+    // Update CSS grid layout
+    if (paneCount === 1) {
+        appContainer.style.gridTemplateColumns = '1fr';
+        appContainer.style.gridTemplateRows = '1fr';
+    } else if (paneCount === 2) {
+        appContainer.style.gridTemplateColumns = '1fr 1fr';
+        appContainer.style.gridTemplateRows = '1fr';
+    } else if (paneCount === 3) {
+        appContainer.style.gridTemplateColumns = '1fr 1fr 1fr';
+        appContainer.style.gridTemplateRows = '1fr';
+    } else if (paneCount === 4) {
+        appContainer.style.gridTemplateColumns = '1fr 1fr';
+        appContainer.style.gridTemplateRows = '1fr 1fr';
+    } else if (paneCount === 6) {
+        appContainer.style.gridTemplateColumns = '1fr 1fr 1fr';
+        appContainer.style.gridTemplateRows = '1fr 1fr';
+    }
 }
 
 paneToggle.addEventListener('click', () => {
-    const next = paneCount === 3 ? 1 : paneCount + 1;
+    const sequence = [1, 2, 3, 4, 6];
+    const nextIdx = (sequence.indexOf(paneCount) + 1) % sequence.length;
+    const next = sequence[nextIdx];
     applyPaneCount(next);
     if (window.api) window.api.settingsSet('paneCount', next);
 });
 
-// Track active pane via focus events on webviews
-paneContainers.forEach((p, i) => {
-    const wv = $(p.webviewId);
-    if (!wv) return;
-    wv.addEventListener('focus', () => { activePaneIndex = i; });
-    // Webview clicks bubble through host; use mouseenter as a hint
-    wv.addEventListener('mouseenter', () => { activePaneIndex = i; });
-});
+
 
 function getActiveWebview() {
     const idx = activePaneIndex < paneCount ? activePaneIndex : 0;
@@ -287,9 +307,32 @@ hotkeyInput.addEventListener('keydown', async (e) => {
 (async function init() {
     if (!window.api) return;
     try {
+        loadLocale("en");
         const s = await window.api.settingsGetAll();
         const v = await window.api.getAppVersion();
         document.getElementById('titlebar-title').textContent = `Gemini Notebook v${v}`;
+        const activeProfile = s.activeProfile || 'default';
+        const partition = activeProfile === 'default' ? 'persist:gemini-notebook' : `persist:gemini-notebook-${activeProfile}`;
+        
+        paneContainers.forEach(p => {
+            const wv = document.createElement('webview');
+            wv.id = p.webviewId;
+            wv.setAttribute('src', 'https://notebook.google.com/');
+            wv.setAttribute('partition', partition);
+            wv.setAttribute('preload', './webview-preload.js');
+            wv.setAttribute('allowpopups', 'true');
+            p.container.insertBefore(wv, $(p.errorId));
+        });
+        
+        attachWebviewListeners();
+        
+        $('profile-select').value = activeProfile;
+        $('profile-select').addEventListener('change', (e) => {
+            window.api.settingsSet('activeProfile', e.target.value);
+            if (confirm("Profile changed. The app needs to reload. Continue?")) {
+                window.api.windowAction('reload');
+            }
+        });
         applyPaneCount(s.paneCount || 1);
         updatePinUI(!!s.alwaysOnTop);
         // Theme will be pushed via theme-changed event after did-finish-load

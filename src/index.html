@@ -82,12 +82,12 @@
       .win-btn:hover { background: var(--btn-bg-hover); }
       #close-btn:hover { background: var(--close-hover); }
 
-      #app-container { flex: 1; display: flex; transition: all 0.3s ease; }
+      #app-container { flex: 1; display: grid; transition: all 0.3s ease; }
       .view-container {
-        flex: 1; display: flex; flex-direction: column;
-        border-right: 1px solid var(--divider); position: relative; min-width: 0;
+        display: flex; flex-direction: column;
+        border-right: 1px solid var(--divider); border-bottom: 1px solid var(--divider); position: relative; min-width: 0; min-height: 0;
       }
-      .view-container:last-child { border-right: none; }
+      
       .view-container.hidden { display: none; }
       webview { flex: 1; width: 100%; height: 100%; }
 
@@ -160,17 +160,17 @@
   <body data-theme="light">
     <div id="titlebar">
       <div id="titlebar-left">
-        <span id="titlebar-title">Gemini-Notebook-for-Windows v3</span>
+        <span id="titlebar-title" data-i18n="title">Gemini-Notebook-for-Windows v3</span>
       </div>
       <div id="titlebar-middle">
         <label class="control-group" title="Ghost Mode (Transparency)">
-          Opacity
+          <span data-i18n="opacity">Opacity</span>
           <input type="range" id="opacity-slider" min="0.2" max="1.0" step="0.05" value="1.0">
         </label>
-        <button id="pane-toggle" class="tbtn" title="Cycle 1 / 2 / 3 panes">Panes: 1</button>
-        <button id="pin-toggle" class="tbtn" title="Always on top">📌 Pin</button>
+        <button id="pane-toggle" class="tbtn" title="Cycle layout (1 to 6 panes)"><span data-i18n="panes">Panes</span>: 1</button>
+        <button id="pin-toggle" class="tbtn" title="Always on top" data-i18n="pin">📌 Pin</button>
         <button id="theme-toggle" class="tbtn" title="Toggle theme">🌙</button>
-        <button id="export-btn" class="tbtn" title="Export notes as Markdown">⬇ Export</button>
+        <button id="export-btn" class="tbtn" title="Export notes as Markdown" data-i18n="export">⬇ Export</button>
         <button id="settings-btn" class="tbtn" title="Settings">⚙</button>
       </div>
       <div id="titlebar-right">
@@ -178,43 +178,111 @@
         <button class="win-btn" id="max-btn">&#xE922;</button>
         <button class="win-btn" id="close-btn">&#xE8BB;</button>
       </div>
+      <div class="view-container hidden" id="view4-container" data-pane="4">
+        <webview id="notebookView4" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err4">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView4">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view5-container" data-pane="5">
+        <webview id="notebookView5" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err5">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView5">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view6-container" data-pane="6">
+        <webview id="notebookView6" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err6">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView6">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
     </div>
+
 
     <div id="app-container">
       <div class="view-container" id="view1-container" data-pane="1">
-        <webview id="notebookView1" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        
         <div class="error-overlay" id="err1">
-          <div class="err-title">Couldn't reach Gemini Notebook</div>
-          <div class="err-body" id="err1-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-title" data-i18n="error_title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body" id="err1-body" data-i18n="error_body">Check your internet connection or try again in a moment.</div>
           <div class="err-actions">
-            <button class="primary" data-retry="notebookView1">Retry</button>
-            <button data-open-browser="1">Open in browser</button>
+            <button class="primary" data-retry="notebookView1" data-i18n="retry">Retry</button>
+            <button data-open-browser="1" data-i18n="open_browser">Open in browser</button>
           </div>
         </div>
       </div>
       <div class="view-container hidden" id="view2-container" data-pane="2">
-        <webview id="notebookView2" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        
         <div class="error-overlay" id="err2">
-          <div class="err-title">Couldn't reach Gemini Notebook</div>
-          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-title" data-i18n="error_title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body" data-i18n="error_body">Check your internet connection or try again in a moment.</div>
           <div class="err-actions">
-            <button class="primary" data-retry="notebookView2">Retry</button>
-            <button data-open-browser="1">Open in browser</button>
+            <button class="primary" data-retry="notebookView2" data-i18n="retry">Retry</button>
+            <button data-open-browser="1" data-i18n="open_browser">Open in browser</button>
           </div>
         </div>
       </div>
       <div class="view-container hidden" id="view3-container" data-pane="3">
-        <webview id="notebookView3" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        
         <div class="error-overlay" id="err3">
+          <div class="err-title" data-i18n="error_title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body" data-i18n="error_body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView3" data-i18n="retry">Retry</button>
+            <button data-open-browser="1" data-i18n="open_browser">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view4-container" data-pane="4">
+        <webview id="notebookView4" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err4">
           <div class="err-title">Couldn't reach Gemini Notebook</div>
           <div class="err-body">Check your internet connection or try again in a moment.</div>
           <div class="err-actions">
-            <button class="primary" data-retry="notebookView3">Retry</button>
+            <button class="primary" data-retry="notebookView4">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view5-container" data-pane="5">
+        <webview id="notebookView5" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err5">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView5">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view6-container" data-pane="6">
+        <webview id="notebookView6" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err6">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView6">Retry</button>
             <button data-open-browser="1">Open in browser</button>
           </div>
         </div>
       </div>
     </div>
+
 
     <footer>
       <div class="footer-side-left">
@@ -240,13 +308,13 @@
     <!-- Settings modal -->
     <div class="modal-backdrop" id="settings-modal">
       <div class="modal">
-        <h2>Settings</h2>
+        <h2 data-i18n="settings">Settings</h2>
         <div class="row">
-          <label for="theme-select">Theme</label>
+          <label for="theme-select" data-i18n="theme">Theme</label>
           <select id="theme-select">
             <option value="system">Follow system</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
+            <option value="light" data-i18n="light">Light</option>
+            <option value="dark" data-i18n="dark">Dark</option>
           </select>
         </div>
         <div class="row">
@@ -264,13 +332,49 @@
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
           </select>
         </div>
         <div class="footer-row">
-          <button id="settings-close">Close</button>
+          <button id="settings-close" data-i18n="close">Close</button>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view4-container" data-pane="4">
+        <webview id="notebookView4" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err4">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView4">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view5-container" data-pane="5">
+        <webview id="notebookView5" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err5">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView5">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view6-container" data-pane="6">
+        <webview id="notebookView6" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err6">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView6">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
         </div>
       </div>
     </div>
+
 
     <!-- What's New modal -->
     <div class="modal-backdrop" id="whats-new-modal">
@@ -279,11 +383,45 @@
         <div id="whats-new-content" style="margin-top: 10px; margin-bottom: 20px; font-size: 13px; color: var(--text);">
         </div>
         <div class="row" style="justify-content: flex-end;">
-          <button class="btn" id="whats-new-dismiss">Got it</button>
+          <button class="btn" id="whats-new-dismiss" data-i18n="got_it">Got it</button>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view4-container" data-pane="4">
+        <webview id="notebookView4" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err4">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView4">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view5-container" data-pane="5">
+        <webview id="notebookView5" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err5">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView5">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
+        </div>
+      </div>
+      <div class="view-container hidden" id="view6-container" data-pane="6">
+        <webview id="notebookView6" src="https://notebook.google.com/" partition="persist:gemini-notebook" preload="./webview-preload.js" allowpopups></webview>
+        <div class="error-overlay" id="err6">
+          <div class="err-title">Couldn't reach Gemini Notebook</div>
+          <div class="err-body">Check your internet connection or try again in a moment.</div>
+          <div class="err-actions">
+            <button class="primary" data-retry="notebookView6">Retry</button>
+            <button data-open-browser="1">Open in browser</button>
+          </div>
         </div>
       </div>
     </div>
 
+    <script src="i18n.js"></script>
     <script src="renderer.js"></script>
     <script>
       document.getElementById('min-btn').innerText = '—';

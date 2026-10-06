@@ -12,6 +12,7 @@ const DEFAULTS = {
     paneCount: 1,
     quickClipAccelerator: 'CommandOrControl+Alt+N',
     autoLaunch: true,
+    activeProfile: 'default',
     lastShownVersion: null,
     windowBounds: null,
     windowMaximized: false,

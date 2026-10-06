@@ -1,0 +1,22 @@
+{
+  "title": "Gemini-Notebook-for-Windows v3",
+  "opacity": "Opacity",
+  "panes": "Panes",
+  "pin": "📌 Pin",
+  "export": "⬇ Export",
+  "error_title": "Couldn't reach Gemini Notebook",
+  "error_body": "Check your internet connection or try again in a moment.",
+  "retry": "Retry",
+  "open_browser": "Open in browser",
+  "settings": "Settings",
+  "theme": "Theme",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "hotkey": "Quick-Clip Hotkey",
+  "always_on_top": "Always on Top",
+  "autolaunch": "Launch on Startup",
+  "close": "Close",
+  "whats_new": "What's New in this version",
+  "got_it": "Got it"
+}
