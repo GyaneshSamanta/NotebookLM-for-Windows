@@ -12,6 +12,8 @@ const DEFAULTS = {
     paneCount: 1,
     quickClipAccelerator: 'CommandOrControl+Alt+N',
     autoLaunch: true,
+    windowBounds: null,
+    windowMaximized: false,
 };
 
 let settingsPath = null;
