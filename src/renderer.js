@@ -88,7 +88,7 @@ document.querySelectorAll('[data-retry]').forEach(btn => {
     });
 });
 document.querySelectorAll('[data-open-browser]').forEach(btn => {
-    btn.addEventListener('click', () => openLink('https://notebooklm.google.com/'));
+    btn.addEventListener('click', () => openLink('https://notebook.google.com/'));
 });
 
 // ---------- Always-on-top ----------
@@ -191,12 +191,12 @@ async function handleNotesExtracted(payload) {
     if (!pendingExport) return;
     pendingExport = false;
     if (!payload || !payload.markdown) {
-        if (window.api) window.api.showNotification('Export failed', 'Could not find notes — NotebookLM layout may have changed. Please file an issue.');
+        if (window.api) window.api.showNotification('Export failed', 'Could not find notes — Gemini Notebook layout may have changed. Please file an issue.');
         return;
     }
     if (!window.api) return;
     const result = await window.api.saveNotesMarkdown({
-        filename: (payload.title || 'notebooklm-notes') + '.md',
+        filename: (payload.title || 'gemini-notebook-notes') + '.md',
         content: payload.markdown,
     });
     if (result && result.ok) {

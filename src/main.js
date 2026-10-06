@@ -8,7 +8,7 @@ const AutoLaunch = require('auto-launch');
 const { autoUpdater } = require('electron-updater');
 const settings = require('./settings');
 
-app.setName('NotebookLM-for-Windows');
+app.setName('Gemini-Notebook-for-Windows');
 
 const isMac = process.platform === 'darwin';
 const isLinux = process.platform === 'linux';
@@ -19,7 +19,7 @@ let tray;
 let isQuitting = false;
 let currentAccelerator = null;
 
-const appLauncher = new AutoLaunch({ name: 'NotebookLM-for-Windows' });
+const appLauncher = new AutoLaunch({ name: 'Gemini-Notebook-for-Windows' });
 
 function createWindow() {
     const initialOpacity = settings.get('opacity');
@@ -100,7 +100,7 @@ function createTray() {
         { label: 'Quit', click: () => { isQuitting = true; app.quit(); } },
     ]);
 
-    tray.setToolTip('NotebookLM-for-Windows');
+    tray.setToolTip('Gemini-Notebook-for-Windows');
     tray.setContextMenu(contextMenu);
 
     tray.on('click', () => {
@@ -225,7 +225,7 @@ app.whenReady().then(() => {
     settings.init();
 
     try {
-        session.fromPartition('persist:notebooklm', { cache: true });
+        session.fromPartition('persist:gemini-notebook', { cache: true });
     } catch (err) {
         console.error('Session config error:', err);
     }
@@ -352,7 +352,7 @@ ipcMain.handle('set-theme', (event, value) => {
 ipcMain.handle('notes:save-markdown', async (event, { filename, content }) => {
     const result = await dialog.showSaveDialog(mainWindow, {
         title: 'Export notes',
-        defaultPath: filename || 'notebooklm-notes.md',
+        defaultPath: filename || 'gemini-notebook-notes.md',
         filters: [{ name: 'Markdown', extensions: ['md'] }],
     });
     if (result.canceled || !result.filePath) return { ok: false };
@@ -386,7 +386,7 @@ autoUpdater.autoInstallOnAppQuit = true;
 autoUpdater.on('update-available', () => {
     new Notification({
         title: 'Update Available',
-        body: 'A new version of NotebookLM-for-Windows is available. It will be downloaded in the background.',
+        body: 'A new version of Gemini-Notebook-for-Windows is available. It will be downloaded in the background.',
     }).show();
 });
 

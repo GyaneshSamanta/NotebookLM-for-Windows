@@ -21,7 +21,7 @@ function checkForNotifications(mutations) {
                 (text.length < 100 && NOTIFICATION_TRIGGERS.some(t => text.includes(t)));
             if (isToast) {
                 ipcRenderer.sendToHost('notebook-event', {
-                    title: 'NotebookLM Update',
+                    title: 'Gemini Notebook Update',
                     body: text.substring(0, 100),
                 });
             }
@@ -81,7 +81,7 @@ ipcRenderer.on('url-drop', (event, url) => {
         navigator.clipboard.writeText(url).catch(() => {});
         ipcRenderer.sendToHost('notebook-event', {
             title: 'URL copied',
-            body: 'Open Add Source and paste — NotebookLM URL field not detected automatically.',
+            body: 'Open Add Source and paste — Gemini Notebook URL field not detected automatically.',
         });
     } catch (e) {
         console.error('url-drop handler failed', e);
@@ -100,11 +100,11 @@ ipcRenderer.on('extract-notes', () => {
 });
 
 function extractNotesAsMarkdown() {
-    // NotebookLM selectors are not stable. Strategy: walk likely note containers,
+    // Gemini Notebook selectors are not stable. Strategy: walk likely note containers,
     // fall back to a broad scrape of the notes panel.
     const title = (document.querySelector('h1, [role="heading"][aria-level="1"]') || {}).innerText
-        || document.title.replace(/ - NotebookLM.*$/, '')
-        || 'NotebookLM notes';
+        || document.title.replace(/ - Gemini Notebook.*$/, '')
+        || 'Gemini Notebook notes';
 
     // Heuristic: notes typically live in cards within a notes panel.
     const candidateSelectors = [
@@ -137,7 +137,7 @@ function extractNotesAsMarkdown() {
         return `## ${headText}\n\n${body}`.trim();
     }).filter(Boolean);
 
-    const markdown = `# ${title}\n\n_Exported from NotebookLM via NotebookLM-for-Windows_\n\n${sections.join('\n\n---\n\n')}\n`;
+    const markdown = `# ${title}\n\n_Exported from Gemini Notebook via Gemini-Notebook-for-Windows_\n\n${sections.join('\n\n---\n\n')}\n`;
     return { markdown, title };
 }
 

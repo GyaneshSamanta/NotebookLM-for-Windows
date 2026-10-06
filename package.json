@@ -1,7 +1,7 @@
 {
-  "name": "notebooklm-for-windows",
+  "name": "gemini-notebook-for-windows",
   "version": "3.0.0",
-  "description": "Native cross-platform desktop wrapper for Google NotebookLM",
+  "description": "Native cross-platform desktop wrapper for Google Gemini Notebook",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -31,8 +31,8 @@
     "electron-updater": "^6.3.9"
   },
   "build": {
-    "appId": "com.gyanesh.notebooklm-for-windows",
-    "productName": "NotebookLM-for-Windows",
+    "appId": "com.gyanesh.gemini-notebook-for-windows",
+    "productName": "Gemini-Notebook-for-Windows",
     "directories": {
       "output": "dist"
     },
@@ -50,27 +50,27 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "NotebookLM-for-Windows",
-      "artifactName": "NotebookLM-for-Windows-v${version}-Setup.${ext}"
+      "shortcutName": "Gemini-Notebook-for-Windows",
+      "artifactName": "Gemini-Notebook-for-Windows-v${version}-Setup.${ext}"
     },
     "portable": {
-      "artifactName": "NotebookLM-for-Windows-v${version}.${ext}"
+      "artifactName": "Gemini-Notebook-for-Windows-v${version}.${ext}"
     },
     "mac": {
       "target": ["dmg", "zip"],
       "icon": "assets/icon.png",
       "category": "public.app-category.productivity",
       "darkModeSupport": true,
-      "artifactName": "NotebookLM-for-Mac-v${version}.${ext}"
+      "artifactName": "Gemini-Notebook-for-Mac-v${version}.${ext}"
     },
     "dmg": {
-      "artifactName": "NotebookLM-for-Mac-v${version}.${ext}"
+      "artifactName": "Gemini-Notebook-for-Mac-v${version}.${ext}"
     },
     "linux": {
       "target": ["AppImage", "deb"],
       "icon": "assets/icon.png",
       "category": "Office",
-      "artifactName": "NotebookLM-for-Linux-v${version}.${ext}"
+      "artifactName": "Gemini-Notebook-for-Linux-v${version}.${ext}"
     }
   }
 }
