@@ -1,17 +1,18 @@
 const { test, expect } = require('@playwright/test');
-const { launchApp, closeApp } = require('../helpers');
+const { launchApp, cleanup } = require('../helpers');
 
 let app;
 let window;
 
 test.beforeEach(async () => {
-    app = await launchApp();
-    window = await app.firstWindow();
+    const res = await launchApp();
+    app = res;
+    window = await res.app.firstWindow();
     await window.waitForLoadState('domcontentloaded');
 });
 
 test.afterEach(async () => {
-    await closeApp(app);
+    await cleanup(app);
 });
 
 test.describe('visual regression', () => {
