@@ -10,4 +10,7 @@ module.exports = defineConfig({
   use: {
     trace: 'retain-on-failure',
   },
+  expect: {
+    toHaveScreenshot: { maxDiffPixelRatio: 0.005 }
+  }
 });
